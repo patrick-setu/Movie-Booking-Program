@@ -1,4 +1,4 @@
-# Import modules
-import tkinter as tk
+# Placeholder for window location
+window = None
 
-window = tk.Tk()
+sess

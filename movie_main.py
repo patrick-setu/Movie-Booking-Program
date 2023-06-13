@@ -8,7 +8,7 @@ import sys
 window = tk.Tk()
 window.title("Movie Booking Program")
 window.geometry("996x700")
-window.config(bg="#EEF4ED")
+# window.config(bg="#EEF4ED")
 window.resizable(False, False)
 
 
@@ -24,15 +24,14 @@ font_name = "Yu Gothic Ui Semilight"
 def close_btn():
     sys.exit()
     
-class frame_maker:
+# class frame_maker:
 
-    def __init__(self, location, bg):
-        self.location = location
-        self.bg = bg
-        self.fr = tk.Frame(self.location, bg = self.bg)
-        self.fr.pack(expand=True, fill="both")
+#     def __init__(self, location, bg):
+#         self.location = location
+#         self.bg = bg
+#         self.fr = tk.Frame(self.location, bg = self.bg)
+#         self.fr.pack(expand=True, fill="both")
 
-start_screen = frame_maker(window, bg_col)
 
 class label_maker:
 
@@ -48,14 +47,17 @@ class label_maker:
 
 # Creates frame and widgets for first page
 
-# name_label = tk.Label(start_screen , text="Patrick Cinema", font=(font_name, 60), bg=bg_col, fg=btn_col)
-# name_label.place(x = 251, y = 184)
+start_screen = tk.Frame(window, bg=bg_col)
+start_screen.pack(expand=True, fill="both")
 
-# book_btn = tk.Button(start_screen, text="Session Times", font=(font_name, 30), bg=btn_col, fg=bg_col, command= lambda: start_screen.pack_forget())
-# book_btn.place(x=353, y=321)
+name_label = tk.Label(start_screen, text="Patrick Cinema", font=(font_name, 60), bg=bg_col, fg=btn_col)
+name_label.place(x = 251, y = 184)
 
-# exit_btn = tk.Button(start_screen, text="Exit", font=(font_name, 30), bg=btn_col, fg=bg_col, command=close_btn)
-# exit_btn.place(x=443, y=445)
+book_btn = tk.Button(start_screen, text="Session Times", font=(font_name, 30), bg=btn_col, fg=bg_col, command= lambda: start_screen.pack_forget())
+book_btn.place(x=353, y=321)
+
+exit_btn = tk.Button(start_screen, text="Exit", font=(font_name, 30), bg=btn_col, fg=bg_col, command=close_btn)
+exit_btn.place(x=443, y=445)
 
 
 
