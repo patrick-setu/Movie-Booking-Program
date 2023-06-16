@@ -18,11 +18,11 @@ btn_col = "#eef4ed"
 font_name = "Yu Gothic Ui Semilight"
 
 # Importing files here for no error
-import start as st
-st.window = window
+# import start as st
+# st.window = window
 
-# import session_picker as sp
-# sp.window = window
+import session_picker as sp
+sp.window = window
 
 
 
