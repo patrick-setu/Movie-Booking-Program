@@ -1,6 +1,6 @@
 import tkinter as tk
 
-# Constant
+# Constant colour shorthands
 bg_col = "#134074"
 fg_col = "#0b2545"
 btn_col = "#eef4ed"
@@ -11,6 +11,13 @@ font_name = "Yu Gothic Ui Semilight"
 bimg = tk.PhotoImage(file="rect.png")
 mimg = tk.PhotoImage(file="img.png")
 
+# Creating datetime variables
+import datetime
+dt = datetime.datetime.now()
+day_1 = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n1:00pm"
+# do f"{int(dt.strftime('%d'))} for future sessions
+
+
 # Placeholder for window location
 window = None
 
@@ -20,7 +27,7 @@ session_screen.pack(expand=True, fill="both")
 
 class create_button:
 
-    def tester(self):
+    def next_screen(self):
         session_screen.pack_forget()
         import seats as se
 
@@ -32,7 +39,7 @@ class create_button:
         self.x = x
         self.y = y
         self.but = tk.Button(self.location, text = self.text, fg = self.fg, bg = self.bg,
-                             justify="center", font = (font_name, 16), height = 3, border=0, command=self.tester,
+                             justify="center", font = (font_name, 16), height = 3, border=0, command=self.next_screen,
                              highlightcolor=bg_col)
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
@@ -54,12 +61,12 @@ movie_one.place(relx=0.5, rely=0.25, anchor="center")
 but = tk.Label(movie_one, image=mimg, bg = img_bg)
 but.place(relx=0.1, rely=0.5, anchor="center")
 
-# Movie title text
+# Movie one title text
 title_mo = tk.Label(movie_one, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
 title_mo.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mo = create_button(movie_one, "25/01/24\n\n01:00pm", fg_col, btn_col, 0.3, 0.6)
+so_mo = create_button(movie_one, day_1, fg_col, btn_col, 0.3, 0.6)
 st_mo = create_button(movie_one, "26/01/24\n\n02:00pm", fg_col, btn_col, 0.5, 0.6)
 sth_mo = create_button(movie_one, "27/01/24\n\n03:00pm", fg_col, btn_col, 0.7, 0.6)
 
@@ -74,7 +81,7 @@ movie_two.place(relx=0.5, rely=0.55, anchor="center")
 but = tk.Label(movie_two, image=mimg, bg = img_bg)
 but.place(relx=0.1, rely=0.5, anchor="center")
 
-# Movie title text
+# Movie two title text
 title_mt = tk.Label(movie_two, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
 title_mt.place(relx=0.3, rely=0.15, anchor="center")
 
@@ -94,7 +101,7 @@ movie_three.place(relx=0.5, rely=0.85, anchor="center")
 but = tk.Label(movie_three, image=mimg, bg = img_bg)
 but.place(relx=0.1, rely=0.5, anchor="center")
 
-# Movie title text
+# Movie three title text
 title_mth = tk.Label(movie_three, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
 title_mth.place(relx=0.3, rely=0.15, anchor="center")
 

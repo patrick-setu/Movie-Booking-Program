@@ -1,6 +1,6 @@
 import tkinter as tk
 
-# Constant
+# Constant colour shorthands
 bg_col = "#134074"
 fg_col = "#0b2545"
 btn_col = "#eef4ed"

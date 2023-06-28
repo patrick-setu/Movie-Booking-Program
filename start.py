@@ -9,6 +9,8 @@ font_name = "Yu Gothic Ui Semilight"
 
 # Creates frame and widgets for first page
 
+# Window set to none to avoid error
+# as call location/root is in separate file
 window = None
 
 start_screen = tk.Frame(window, bg=bg_col)
