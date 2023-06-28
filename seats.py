@@ -31,6 +31,6 @@ window = None
 seats_screen = tk.Frame(window, bg=bg_col)
 seats_screen.pack(expand=True, fill="both")
 
-# Creating overall frames widgets
+# Creating overall frame's widgets
 image = tk.Label(window, text = 'Ajahy', bg=bg_col)
 image.place(relx=0.5, rely=0.5, anchor="center")

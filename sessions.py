@@ -15,7 +15,9 @@ mimg = tk.PhotoImage(file="img.png")
 import datetime
 dt = datetime.datetime.now()
 day_1 = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n1:00pm"
-# do f"{int(dt.strftime('%d'))} for future sessions
+day_2 = f"{int(dt.strftime('%d'))+1}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n2:00pm"
+day_3 = f"{int(dt.strftime('%d'))+2}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n3:00pm"
+# do f"{int(dt.strftime('%d'))+1}" for future sessions
 
 
 # Placeholder for window location
@@ -67,8 +69,8 @@ title_mo.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
 so_mo = create_button(movie_one, day_1, fg_col, btn_col, 0.3, 0.6)
-st_mo = create_button(movie_one, "26/01/24\n\n02:00pm", fg_col, btn_col, 0.5, 0.6)
-sth_mo = create_button(movie_one, "27/01/24\n\n03:00pm", fg_col, btn_col, 0.7, 0.6)
+st_mo = create_button(movie_one, day_2, fg_col, btn_col, 0.5, 0.6)
+sth_mo = create_button(movie_one, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
@@ -86,9 +88,9 @@ title_mt = tk.Label(movie_two, text="Movie Title", font=(font_name, 25), fg=fg_c
 title_mt.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mt = create_button(movie_two, "25/01/24\n\n01:00pm", fg_col, btn_col, 0.3, 0.6)
-st_mt = create_button(movie_two, "26/01/24\n\n02:00pm", fg_col, btn_col, 0.5, 0.6)
-sth_mt = create_button(movie_two, "27/01/24\n\n03:00pm", fg_col, btn_col, 0.7, 0.6)
+so_mt = create_button(movie_two, day_1, fg_col, btn_col, 0.3, 0.6)
+st_mt = create_button(movie_two, day_2, fg_col, btn_col, 0.5, 0.6)
+sth_mt = create_button(movie_two, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
@@ -106,9 +108,9 @@ title_mth = tk.Label(movie_three, text="Movie Title", font=(font_name, 25), fg=f
 title_mth.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mth = create_button(movie_three, "25/01/24\n\n01:00pm", fg_col, btn_col, 0.3, 0.6)
-st_mth = create_button(movie_three, "26/01/24\n\n02:00pm", fg_col, btn_col, 0.5, 0.6)
-sth_mth = create_button(movie_three, "27/01/24\n\n03:00pm", fg_col, btn_col, 0.7, 0.6)
+so_mth = create_button(movie_three, day_1, fg_col, btn_col, 0.3, 0.6)
+st_mth = create_button(movie_three, day_2, fg_col, btn_col, 0.5, 0.6)
+sth_mth = create_button(movie_three, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
