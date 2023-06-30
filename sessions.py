@@ -14,11 +14,20 @@ mimg = tk.PhotoImage(file="img.png")
 # Creating datetime variables
 import datetime
 dt = datetime.datetime.now()
-day_1 = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n1:00pm"
-day_2 = f"{int(dt.strftime('%d'))+1}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n2:00pm"
-day_3 = f"{int(dt.strftime('%d'))+2}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n3:00pm"
-# do f"{int(dt.strftime('%d'))+1}" for future sessions
+day = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n"
 
+def inserted_time(increase_by):
+    time = int(dt.strftime('%I'))
+    time += increase_by
+    if time > 12:
+        time -= 12
+    str(time)
+    return time
+
+time_one = day,inserted_time(0)
+print(time_one)
+time_two = day + inserted_time(2)
+time_three = day + inserted_time(4)
 
 # Placeholder for window location
 window = None
@@ -68,9 +77,9 @@ title_mo = tk.Label(movie_one, text="Movie Title", font=(font_name, 25), fg=fg_c
 title_mo.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mo = create_button(movie_one, day_1, fg_col, btn_col, 0.3, 0.6)
-st_mo = create_button(movie_one, day_2, fg_col, btn_col, 0.5, 0.6)
-sth_mo = create_button(movie_one, day_3, fg_col, btn_col, 0.7, 0.6)
+# so_mo = create_button(movie_one, time_one, fg_col, btn_col, 0.3, 0.6)
+# st_mo = create_button(movie_one, day_2, fg_col, btn_col, 0.5, 0.6)
+# sth_mo = create_button(movie_one, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
@@ -88,9 +97,9 @@ title_mt = tk.Label(movie_two, text="Movie Title", font=(font_name, 25), fg=fg_c
 title_mt.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mt = create_button(movie_two, day_1, fg_col, btn_col, 0.3, 0.6)
-st_mt = create_button(movie_two, day_2, fg_col, btn_col, 0.5, 0.6)
-sth_mt = create_button(movie_two, day_3, fg_col, btn_col, 0.7, 0.6)
+# so_mt = create_button(movie_two, day_1, fg_col, btn_col, 0.3, 0.6)
+# st_mt = create_button(movie_two, day_2, fg_col, btn_col, 0.5, 0.6)
+# sth_mt = create_button(movie_two, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
@@ -108,9 +117,9 @@ title_mth = tk.Label(movie_three, text="Movie Title", font=(font_name, 25), fg=f
 title_mth.place(relx=0.3, rely=0.15, anchor="center")
 
 # Session buttons
-so_mth = create_button(movie_three, day_1, fg_col, btn_col, 0.3, 0.6)
-st_mth = create_button(movie_three, day_2, fg_col, btn_col, 0.5, 0.6)
-sth_mth = create_button(movie_three, day_3, fg_col, btn_col, 0.7, 0.6)
+# so_mth = create_button(movie_three, day_1, fg_col, btn_col, 0.3, 0.6)
+# st_mth = create_button(movie_three, day_2, fg_col, btn_col, 0.5, 0.6)
+# sth_mth = create_button(movie_three, day_3, fg_col, btn_col, 0.7, 0.6)
 
 # --------------------------------------------------------------------
 
