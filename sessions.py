@@ -34,13 +34,37 @@ class create_button:
         import seats as se
         se.seats.pack(expand=True, fill="both")
 
-    def __init__(self, location, text, fg, bg, x, y):
+        # Displays selected movie title on next page
+        if self.movie_num == 1:
+            se.movie_title.config(text="Spider-Man: Across the Spider-Verse")
+            se.movie_title.place(relx=0.525, rely=0.1, anchor="center")
+            se.image.config(image=spider)
+
+        elif self.movie_num == 2:
+            se.movie_title.config(text="Barbie")
+            se.movie_title.place(relx=0.25, rely=0.1, anchor="center")
+            se.image.config(image=barbie)
+
+        elif self.movie_num == 3:
+            se.movie_title.config(text="The Super Mario Bros. Movie")
+            se.movie_title.place(relx=0.45, rely=0.1, anchor="center")
+            se.image.config(image=mario)
+
+        if self.text == first:
+            se.time_label.config(text=self.text)
+        elif self.text == second:
+            se.time_label.config(text=self.text)
+        else:
+            se.time_label.config(text=self.text)
+
+    def __init__(self, location, text, fg, bg, x, y, movie_num):
         self.location = location
         self.text = text
         self.fg = fg
         self.bg = bg
         self.x = x
         self.y = y
+        self.movie_num = movie_num
         self.but = tk.Button(self.location, text = self.text, fg = self.fg, bg = self.bg,
                              justify="center", font = (font_name, 16), height = 3, border=0, command=self.next_screen,
                              highlightcolor=bg_col)
@@ -69,9 +93,9 @@ title_mo = tk.Label(movie_one, text="Spider-Man: Across the Spider-Verse", font=
 title_mo.place(relx=0.45, rely=0.15, anchor="center")
 
 # Session buttons
-so_mo = create_button(movie_one, first, fg_col, btn_col, 0.3, 0.6)
-st_mo = create_button(movie_one, second, fg_col, btn_col, 0.5, 0.6)
-sth_mo = create_button(movie_one, third, fg_col, btn_col, 0.7, 0.6)
+so_mo = create_button(movie_one, first, fg_col, btn_col, 0.3, 0.6, 1)
+st_mo = create_button(movie_one, second, fg_col, btn_col, 0.5, 0.6, 1)
+sth_mo = create_button(movie_one, third, fg_col, btn_col, 0.7, 0.6, 1)
 
 # --------------------------------------------------------------------
 
@@ -89,9 +113,9 @@ title_mt = tk.Label(movie_two, text="Barbie", font=(font_name, 25), fg=fg_col, b
 title_mt.place(relx=0.275, rely=0.15, anchor="center")
 
 # Session buttons
-so_mt = create_button(movie_two, first, fg_col, btn_col, 0.3, 0.6)
-st_mt = create_button(movie_two, second, fg_col, btn_col, 0.5, 0.6)
-sth_mt = create_button(movie_two, third, fg_col, btn_col, 0.7, 0.6)
+so_mt = create_button(movie_two, first, fg_col, btn_col, 0.3, 0.6, 2)
+st_mt = create_button(movie_two, second, fg_col, btn_col, 0.5, 0.6, 2)
+sth_mt = create_button(movie_two, third, fg_col, btn_col, 0.7, 0.6, 2)
 
 # --------------------------------------------------------------------
 
@@ -109,11 +133,6 @@ title_mth = tk.Label(movie_three, text="The Super Mario Bros. Movie", font=(font
 title_mth.place(relx=0.4, rely=0.15, anchor="center")
 
 # Session buttons
-so_mth = create_button(movie_three, first, fg_col, btn_col, 0.3, 0.6)
-st_mth = create_button(movie_three, second, fg_col, btn_col, 0.5, 0.6)
-sth_mth = create_button(movie_three, third, fg_col, btn_col, 0.7, 0.6)
-
-# --------------------------------------------------------------------
-
-# use to get widget height
-# print(widget.winfo_reqheight())
+so_mth = create_button(movie_three, first, fg_col, btn_col, 0.3, 0.6, 3)
+st_mth = create_button(movie_three, second, fg_col, btn_col, 0.5, 0.6, 3)
+sth_mth = create_button(movie_three, third, fg_col, btn_col, 0.7, 0.6, 3)

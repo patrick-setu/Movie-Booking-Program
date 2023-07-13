@@ -50,11 +50,10 @@ seats = tk.Frame(window, bg=bg_col)
 seats.pack(expand=True, fill="both")
 
 # Creating overall frame's widgets
-image = tk.Label(seats, image=img, bg=bg_col)
+image = tk.Label(seats, image=None, bg=bg_col)
 image.place(relx=0.1, rely=0.15, anchor="center")
 
-movie_title = tk.Label(seats, text="Movie One", font=(font_name, 40), fg=btn_col, bg=bg_col)
-movie_title.place(relx=0.3, rely=0.1, anchor="center")
+movie_title = tk.Label(seats, text=None, font=(font_name, 40), fg=btn_col, bg=bg_col)
 
 # Availability labels
 selected = tk.Label(seats, text="Selected", font=(font_name, 25), fg=btn_col, bg=bg_col)
@@ -74,10 +73,13 @@ available.place(relx=0.9, rely=0.2, anchor="center")
 available_box = seat_label(seats, "white", 0.83, 0.2)
 
 # Specified movie and session time
-session_label = tk.Label(seats, text = "Session\nTime", justify="center", font=(font_name, 30),
+session_label = tk.Label(seats, text = "Session", justify="center", font=(font_name, 40),
                          fg=btn_col, bg=bg_col)
-session_label.place(relx=0.1, rely=0.35, anchor="center")
-# get the session pressed from previous screen
+session_label.place(relx=0.1, rely=0.325, anchor="center")
+
+time_label = tk.Label(seats, text=None, justify="center", font=(font_name, 25),
+                      fg=btn_col, bg=bg_col)
+time_label.place(relx=0.1, rely=0.45, anchor="center")
 
 
 # Page controlling buttons
