@@ -7,8 +7,6 @@ btn_col = "#eef4ed"
 img_bg = "#8DA9C4"
 font_name = "Yu Gothic Ui Semilight"
 
-# Importing image
-img = tk.PhotoImage(file="img.png")
 
 class seat_label:
 
@@ -40,7 +38,7 @@ class create_button:
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
                              fg=bg_col, command= self.comm, height = 1,
-                             borderwidth=0, font=(font_name, ))
+                             borderwidth=0, highlightbackground=bg_col)
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
 window = None

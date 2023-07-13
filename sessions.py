@@ -65,9 +65,8 @@ class create_button:
         self.x = x
         self.y = y
         self.movie_num = movie_num
-        self.but = tk.Button(self.location, text = self.text, fg = self.fg, bg = self.bg,
-                             justify="center", font = (font_name, 16), height = 3, border=0, command=self.next_screen,
-                             highlightcolor=bg_col)
+        self.but = tk.Button(self.location, text = self.text, fg = self.fg, background= self.bg,
+                             justify="center", font = (font_name, 16), height = 3, border=0, command=self.next_screen)
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
 
