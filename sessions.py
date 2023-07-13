@@ -9,7 +9,9 @@ font_name = "Yu Gothic Ui Semilight"
 
 # Importing images
 bimg = tk.PhotoImage(file="rect.png")
-mimg = tk.PhotoImage(file="img.png")
+spider = tk.PhotoImage(file="spider 1.png")
+barbie = tk.PhotoImage(file="barbie.png")
+mario = tk.PhotoImage(file="mario.png")
 
 # Creating datetime variables
 import datetime
@@ -30,6 +32,7 @@ class create_button:
     def next_screen(self):
         session_screen.pack_forget()
         import seats as se
+        se.seats.pack(expand=True, fill="both")
 
     def __init__(self, location, text, fg, bg, x, y):
         self.location = location
@@ -58,12 +61,12 @@ movie_one = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_one.place(relx=0.5, rely=0.25, anchor="center")
 
 # Placeholder movie image
-but = tk.Label(movie_one, image=mimg, bg = img_bg)
-but.place(relx=0.1, rely=0.5, anchor="center")
+picture = tk.Label(movie_one, image=spider, bg = img_bg)
+picture.place(relx=0.1, rely=0.5, anchor="center")
 
 # Movie one title text
-title_mo = tk.Label(movie_one, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
-title_mo.place(relx=0.3, rely=0.15, anchor="center")
+title_mo = tk.Label(movie_one, text="Spider-Man: Across the Spider-Verse", font=(font_name, 25), fg=fg_col, bg=img_bg)
+title_mo.place(relx=0.45, rely=0.15, anchor="center")
 
 # Session buttons
 so_mo = create_button(movie_one, first, fg_col, btn_col, 0.3, 0.6)
@@ -78,12 +81,12 @@ movie_two = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_two.place(relx=0.5, rely=0.55, anchor="center")
 
 # Placeholder movie image
-but = tk.Label(movie_two, image=mimg, bg = img_bg)
-but.place(relx=0.1, rely=0.5, anchor="center")
+picture = tk.Label(movie_two, image=barbie, bg = img_bg)
+picture.place(relx=0.1, rely=0.5, anchor="center")
 
 # Movie two title text
-title_mt = tk.Label(movie_two, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
-title_mt.place(relx=0.3, rely=0.15, anchor="center")
+title_mt = tk.Label(movie_two, text="Barbie", font=(font_name, 25), fg=fg_col, bg=img_bg)
+title_mt.place(relx=0.275, rely=0.15, anchor="center")
 
 # Session buttons
 so_mt = create_button(movie_two, first, fg_col, btn_col, 0.3, 0.6)
@@ -98,12 +101,12 @@ movie_three = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_three.place(relx=0.5, rely=0.85, anchor="center")
 
 # Placeholder movie image
-but = tk.Label(movie_three, image=mimg, bg = img_bg)
-but.place(relx=0.1, rely=0.5, anchor="center")
+picture = tk.Label(movie_three, image=mario, bg = img_bg)
+picture.place(relx=0.1, rely=0.5, anchor="center")
 
 # Movie three title text
-title_mth = tk.Label(movie_three, text="Movie Title", font=(font_name, 25), fg=fg_col, bg=img_bg)
-title_mth.place(relx=0.3, rely=0.15, anchor="center")
+title_mth = tk.Label(movie_three, text="The Super Mario Bros. Movie", font=(font_name, 25), fg=fg_col, bg=img_bg)
+title_mth.place(relx=0.4, rely=0.15, anchor="center")
 
 # Session buttons
 so_mth = create_button(movie_three, first, fg_col, btn_col, 0.3, 0.6)

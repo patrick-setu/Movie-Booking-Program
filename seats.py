@@ -22,17 +22,24 @@ class seat_label:
                              borderwidth=0)
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
+def screen_back():
+    seats.pack_forget()
+    import sessions as ss
+    ss.session_screen.pack(expand=True, fill="both")
+
 class create_button:
 
-    def __init__(self, location, text, fg, bg, x, y):
+
+    def __init__(self, location, text, fg, bg, x, y, comm = None):
         self.location = location
         self.text = text
         self.fg = fg
         self.bg = bg
         self.x = x
         self.y = y
+        self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=bg_col, command= None, height = 1,
+                             fg=bg_col, command= self.comm, height = 1,
                              borderwidth=0, font=(font_name, ))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
@@ -74,10 +81,26 @@ session_label.place(relx=0.1, rely=0.35, anchor="center")
 
 
 # Page controlling buttons
-back = create_button(seats, "Back", bg_col, btn_col, 0.4, 0.95,)
+back = create_button(seats, "Back", bg_col, btn_col, 0.4, 0.95, comm=screen_back)
 
 
 # Second frame containing seats
 seat_container = tk.Frame(seats, height=400, width=750, relief="flat",
                           bg=img_bg, cursor="heart", bd=5)
 seat_container.place(relx=0.2, rely=0.3)
+
+hi = tk.Label(seat_container, text="hello", fg = "red", bg="white")
+hi.grid(row = 0, column=2)
+
+r=60
+rw = 1
+clm = 1
+for i in range(r):
+    test = tk.Button(seat_container, fg="green", height=1, padx= 5, pady=5)
+    test.grid(row=(0+rw), column=(0+clm), padx=8, pady=7)
+    test.grid_propagate(False)
+    rw += 1
+    if rw == 6:
+        rw = 0
+        clm += 1
+
