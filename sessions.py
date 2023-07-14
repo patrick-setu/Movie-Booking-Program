@@ -42,7 +42,7 @@ class create_button:
 
         elif self.movie_num == 2:
             se.movie_title.config(text="Barbie")
-            se.movie_title.place(relx=0.25, rely=0.1, anchor="center")
+            se.movie_title.place(relx=0.3, rely=0.1, anchor="center")
             se.image.config(image=barbie)
 
         elif self.movie_num == 3:
@@ -50,6 +50,7 @@ class create_button:
             se.movie_title.place(relx=0.45, rely=0.1, anchor="center")
             se.image.config(image=mario)
 
+        # Displays time of selected session 
         if self.text == first:
             se.time_label.config(text=self.text)
         elif self.text == second:
@@ -83,7 +84,7 @@ screen_label.place(x=50, y=24)
 movie_one = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_one.place(relx=0.5, rely=0.25, anchor="center")
 
-# Placeholder movie image
+# Movie image
 picture = tk.Label(movie_one, image=spider, bg = img_bg)
 picture.place(relx=0.1, rely=0.5, anchor="center")
 
@@ -103,7 +104,7 @@ sth_mo = create_button(movie_one, third, fg_col, btn_col, 0.7, 0.6, 1)
 movie_two = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_two.place(relx=0.5, rely=0.55, anchor="center")
 
-# Placeholder movie image
+# Movie image
 picture = tk.Label(movie_two, image=barbie, bg = img_bg)
 picture.place(relx=0.1, rely=0.5, anchor="center")
 
@@ -123,7 +124,7 @@ sth_mt = create_button(movie_two, third, fg_col, btn_col, 0.7, 0.6, 2)
 movie_three = tk.Label(session_screen, image = bimg, bg = bg_col)
 movie_three.place(relx=0.5, rely=0.85, anchor="center")
 
-# Placeholder movie image
+# Movie image
 picture = tk.Label(movie_three, image=mario, bg = img_bg)
 picture.place(relx=0.1, rely=0.5, anchor="center")
 

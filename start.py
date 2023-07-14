@@ -19,9 +19,9 @@ start_screen.pack(expand=True, fill="both")
 name_label = tk.Label(start_screen, text="Patrick Cinema", font=(font_name, 60), bg=bg_col, fg=btn_col)
 name_label.place(relx=0.5, rely = 0.3,anchor="center")
 
-book_btn = tk.Button(start_screen, text="Session Times", font=(font_name, 30), bg=btn_col,
- fg=bg_col)
+book_btn = tk.Button(start_screen, text="Session Times", font=(font_name, 30), bg=fg_col,
+ fg=fg_col)
 book_btn.place(relx=0.5, rely = 0.5, anchor="center")
 
-exit_btn = tk.Button(start_screen, text="Exit", font=(font_name, 30), bg=btn_col, fg=bg_col, command= lambda: window.destroy())
+exit_btn = tk.Button(start_screen, text="Exit", font=(font_name, 30), bg=btn_col, fg=fg_col, command= lambda: window.destroy())
 exit_btn.place(relx=0.5, rely = 0.7,anchor="center")
