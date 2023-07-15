@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 # Constant colour shorthands
 bg_col = "#134074"
@@ -7,6 +8,18 @@ btn_col = "#eef4ed"
 img_bg = "#8DA9C4"
 font_name = "Yu Gothic Ui Semilight"
 
+# Importing images
+bimg = tk.PhotoImage(file="rect.png")
+spider = tk.PhotoImage(file="spider 1.png")
+barbie = tk.PhotoImage(file="barbie.png")
+mario = tk.PhotoImage(file="mario.png")
+
+# Creating datetime variables
+import datetime
+dt = datetime.datetime.now()
+first = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n1:00pm"
+second = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n2:00pm"
+third = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n3:00pm"
 
 class seat_label:
 
@@ -28,9 +41,46 @@ def screen_back():
 
 
 def screen_forward():
-    seats.pack_forget()
-    import tickets as ts
-    ts.tickets.pack(expand=True, fill="both")
+
+    if len(selected_seats) < 1:
+        messagebox.showerror("Error", "No seats have been selected")
+    else:
+        stored_seats = open("seat_data.txt", "w")
+        stored_seats.write("Amount of selected seats:\n")
+        stored_seats.write(f"{len(selected_seats)}\n")
+        stored_seats.write("Selected seats:\n")
+        for seat in selected_seats:
+            stored_seats.write(seat+"\n")
+        
+        stored_seats.close()
+
+        seats.pack_forget()
+        import tickets as ts
+        ts.tickets.pack(expand=True, fill="both")
+
+        # Displays selected movie title on next page
+        if "Spider" in movie_title.cget("text"):
+            ts.movie_title.config(text="Spider-Man: Across the Spider-Verse")
+            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
+            ts.image.config(image=spider)
+
+        elif "Barbie" in movie_title.cget("text"):
+            ts.movie_title.config(text="Barbie")
+            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
+            ts.image.config(image=barbie)
+
+        elif "Mario" in movie_title.cget("text"):
+            ts.movie_title.config(text="The Super Mario Bros. Movie")
+            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
+            ts.image.config(image=mario)
+
+        # Displays time of selected session 
+        if time_label.cget("text") == first:
+            ts.time_label.config(text=first)
+        elif time_label.cget("text") == second:
+            ts.time_label.config(text=second)
+        else:
+            ts.time_label.config(text=third)
 
 
 # Help window
@@ -55,6 +105,8 @@ def pop_up():
     body_text.place(relx=0.5, rely=0.5, anchor="center")
 
     close = create_button(help_bg, "Close", fg_col, btn_col, 0.5, 0.9, lambda: help.destroy())
+
+
 
 
 class create_button:
@@ -82,7 +134,7 @@ seats = tk.Frame(window, bg=bg_col)
 
 
 # Creating overall frame's widgets
-image = tk.Label(seats, image=None, bg=bg_col, height=900, width=500)
+image = tk.Label(seats, image=None, bg=bg_col)
 image.place(relx=0.1, rely=0.15, anchor="center")
 
 movie_title = tk.Label(seats, text=None, font=(font_name, 40), fg=btn_col, bg=bg_col)
@@ -118,31 +170,39 @@ time_label = tk.Label(seats, text=None, justify="center", font=(font_name, 25),
 time_label.place(relx=0.1, rely=0.5, anchor="center")
 
 
-# Page controlling buttons
-back = create_button(seats, "Back", fg_col, btn_col, 0.4, 0.95, comm=screen_back)
-forward = create_button(seats, "Confirm", fg_col, btn_col, 0.6, 0.95, None)
-
-top_help = create_button(seats, "Help?", fg_col, btn_col, 0.1, 0.95, pop_up)
 
 # Second frame containing seats
 seat_container = tk.Frame(seats, height=400, width=750, relief="flat",
-                          bg=img_bg, cursor="heart", bd=5)
+                          bg=img_bg, bd=5)
 seat_container.place(relx=0.2, rely=0.35)
 
+selected_seats = []
+
+
 class SeatMaker:
+    # Change button colour based on seat IntVar
     def seat_clicked(self, seat_state, seat):
+        # Store user seat data
+        seat_position = seat.grid_info()
+        letter = {"A":0, "B":1, "C":2, "D":3, "E":4}
+        k = list(letter.keys())
+        v = list(letter.values())
+        pos = v.index(seat_position["row"])
+        lett = k[pos]
+        
         if seat_state.get() == 0:
             seat_state.set(1)
         else:
             seat_state.set(0)
         if seat_state.get() == 1:
             seat["bg"] = "green"
-            movie_title.config(text=str(seat['bg']))
+            selected_seats.append((str(lett) + str(seat_position["column"]+1)))
+            selected_seats.sort()
         else:
             seat["bg"] = "white"
-        print(seat["bg"])
-        seat_position = seat.grid_info()
-        print(str(seat_position["row"])+str(seat_position["column"]))
+            selected_seats.pop()
+        selected.config(text=str(seat['bg']))
+
 
 
 # Creates a column of seats when column value inputted to class
@@ -183,6 +243,8 @@ row_seven_seats = SeatMaker(seat_container, 6)
 row_eight_seats = SeatMaker(seat_container, 7)
 row_nine_seats = SeatMaker(seat_container, 8)
 row_ten_seats = SeatMaker(seat_container, 9)
+row_eleven_seats = SeatMaker(seat_container, 10)
+row_twelve_seats = SeatMaker(seat_container, 11)
 
 
 # Creates labels for rows and seat number
@@ -230,3 +292,17 @@ label_9.grid(row=8, column=8, sticky="NSWE", padx=2, pady=1)
 
 label_10 = tk.Label(seat_container, text="10", font=("Aerial", 24), background=img_bg, fg="white")
 label_10.grid(row=8, column=9, sticky="NSWE", padx=2, pady=1)
+
+label_11 = tk.Label(seat_container, text="11", font=("Aerial", 24), background=img_bg, fg="white")
+label_11.grid(row=8, column=10, sticky="NSWE", padx=2, pady=1)
+
+label_12 = tk.Label(seat_container, text="12", font=("Aerial", 24), background=img_bg, fg="white")
+label_12.grid(row=8, column=11, sticky="NSWE", padx=2, pady=1)
+
+
+
+# Page controlling buttons
+back = create_button(seats, "Back", fg_col, btn_col, 0.45, 0.95, screen_back)
+forward = create_button(seats, "Confirm", fg_col, btn_col, 0.55, 0.95, screen_forward)
+
+top_help = create_button(seats, "Help?", img_bg, btn_col, 0.1, 0.95, pop_up)
