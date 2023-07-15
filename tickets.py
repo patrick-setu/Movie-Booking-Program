@@ -13,7 +13,9 @@ type_bg = tk.PhotoImage(file="type_rect.png")
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 seat_data = open("seat_data.txt", "r")
 all_lines = seat_data.readlines()
-
+print(all_lines)
+# It does not go through this code again even
+# after going back page and here again
 
 def screen_back():
     tickets.pack_forget()
