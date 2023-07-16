@@ -104,6 +104,7 @@ def pop_up():
                          fg=btn_col, bg=img_bg, font=(font_name, 20), justify="center")
     body_text.place(relx=0.5, rely=0.5, anchor="center")
 
+    help.grab_set()
     close = create_button(help_bg, "Close", fg_col, btn_col, 0.5, 0.9, lambda: help.destroy())
 
 
