@@ -11,8 +11,11 @@ widget_bg = tk.PhotoImage(file="ticket_rect.png")
 type_bg = tk.PhotoImage(file="type_rect.png")
 
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
+
 seat_data = open("seat_data.txt", "r")
 all_lines = seat_data.readlines()
+print(all_lines)
+seat_data.close()
 
 
 def screen_back():
@@ -45,8 +48,42 @@ class create_button:
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
 
+tot = 5
+adt_tickets = 0
+chd_tickets = 0
+stdn_tickets = 0
+psr_tickets = 0
 
-# class 
+class seat_type:
+
+
+    # get total selected from read file
+
+
+    def __init__(self, location, type):
+        self.location = location
+        self.type = type
+        self.decr = create_button(self.location, "-", fg_col, btn_col, 0.7, 0.5, None)
+        self.lab = tk.Label(self.location, text=None, fg=fg_col, bg="white", height=2,
+                            width=3)
+        place(self.lab, 0.8, 0.5)
+        self.incr = create_button(self.location, "+", fg_col, btn_col, 0.9, 0.5)
+
+    def increase(self, total_seats, type):
+        if (total_seats > 0):
+            print("hello")
+            total_seats -= 1
+            type += 1
+            self.lab.config(text=type)
+        else:
+            print("no u cant")
+
+        return total_seats, type
+
+    def test(self):
+        print("hello")
+        self.lab.config(text="hello")
+
 
 # Creating and configuring root window settings
 window = None
@@ -64,18 +101,19 @@ place(time_label, 0.1, 0.675)
 image = tk.Label(tickets, image=None, bg=bg_col)
 place(image, 0.1, 0.3)
 
+
 # Page widgets
 
 title_label = tk.Label(tickets, text="Tickets", font=(font_name, 40), fg=btn_col, bg=bg_col)
-place(title_label, 0.5, 0.75)
+place(title_label, 0.5, 0.075)
 
 fra = tk.Label(tickets, image=widget_bg, bg=bg_col)
 place(fra, 0.6, 0.55)
 
-seat_amt = tk.Label(fra, text=f"Seats selected: {all_lines[1]}", font=(font_name, 25), fg=btn_col, bg=img_bg)
-place(seat_amt, 0.5, 0.05)
+seat_amt = tk.Label(fra, text=f"Total seats selected: {all_lines[1]}", font=(font_name, 25), fg=btn_col, bg=img_bg)
+place(seat_amt, 0.5, 0.1)
 
-
+# Seat type labels
 adult = tk.Label(fra, image=type_bg, bg=img_bg)
 place(adult, 0.5, 0.2)
 adt_info = tk.Label(adult, text="Adult \t ${:.2f}".format(costs["adult"]), fg=fg_col, bg=btn_col,
@@ -101,8 +139,12 @@ psr_info = tk.Label(pensioner, text="Pensioner \t ${:.2f}".format(costs["pension
 place(psr_info, 0.3, 0.5)
 
 
+seat_type(adult, adt_tickets)
+# seat_type(child)
+# seat_type(student)
+# seat_type(pensioner)
+
+
 # Page controlling buttons
 back = create_button(fra, "Back", fg_col, btn_col, 0.15, 0.95, comm=screen_back)
 forward = create_button(fra, "Confirm", fg_col, btn_col, 0.85, 0.95, None)
-
-seat_data.close()

@@ -1,7 +1,6 @@
 Amount of selected seats:
-4
+3
 Selected seats:
 A1
 A2
-B1
-C1
+A3

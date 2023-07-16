@@ -41,7 +41,8 @@ def screen_back():
 
 
 def screen_forward():
-
+    # Proceed to next page if at least 1 seat selected
+    # otherwise pop up error
     if len(selected_seats) < 1:
         messagebox.showerror("Error", "No seats have been selected")
     else:
@@ -51,9 +52,8 @@ def screen_forward():
         stored_seats.write("Selected seats:\n")
         for seat in selected_seats:
             stored_seats.write(seat+"\n")
-        
         stored_seats.close()
-
+        
         seats.pack_forget()
         import tickets as ts
         ts.tickets.pack(expand=True, fill="both")
