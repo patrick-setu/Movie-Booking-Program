@@ -14,8 +14,6 @@ costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
 seat_data = open("seat_data.txt", "r")
 all_lines = seat_data.readlines()
-print(all_lines)
-seat_data.close()
 
 
 def screen_back():
@@ -148,3 +146,5 @@ seat_type(adult, adt_tickets)
 # Page controlling buttons
 back = create_button(fra, "Back", fg_col, btn_col, 0.15, 0.95, comm=screen_back)
 forward = create_button(fra, "Confirm", fg_col, btn_col, 0.85, 0.95, None)
+
+seat_data.close()
