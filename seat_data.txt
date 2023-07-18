@@ -1,4 +1,4 @@
 Amount of selected seats:
-1
+6
 Selected seats:
-D5
+Session:
