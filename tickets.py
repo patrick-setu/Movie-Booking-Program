@@ -142,11 +142,13 @@ class seat_type():
         self.type_of_ticket = type_of_ticket
         self.total_seats = total_seats
         print(self.type_of_ticket)
-        self.decr = create_button(self.location, "-", fg_col, btn_col, 0.7, 0.5, self.decrease)
+        self.decr = tk.Button(self.location, text="-", fg=fg_col, bg=btn_col, command=self.decrease)
+        self.decr.place(relx=0.7, rely=0.5, anchor="center")
         self.lab = tk.Label(self.location, text=self.type_of_ticket, fg=fg_col, bg="white", height=2,
                             width=3)
-        place(self.lab, 0.8, 0.5)
-        self.incr = create_button(self.location, "+", fg_col, btn_col, 0.9, 0.5, self.increase)
+        self.lab.place(relx=0.8, rely=0.5, anchor="center")
+        self.incr = tk.Button(self.location, text="+", fg=fg_col, bg=btn_col, command=self.increase)
+        self.incr.place(relx=0.9, rely=0.5, anchor="center")
 
 
 
@@ -215,5 +217,5 @@ psr = seat_type(pensioner, psr_tickets)
 
 
 # Page controlling buttons
-back = create_button(fra, "Back", fg_col, btn_col, 0.15, 0.95, comm=screen_back)
+back = create_button(fra, "Back", fg_col, btn_col, 0.15, 0.95, screen_back)
 forward = create_button(fra, "Confirm", fg_col, btn_col, 0.85, 0.95, screen_forward)
