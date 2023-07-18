@@ -226,15 +226,15 @@ class SeatMaker:
         # Make selected when state is 1
             seat["bg"] = "green"
             selected_seats.append((str(lett) + str(seat_position["column"]+1)))
-        if seat_state.get() == 0:
+        elif seat_state.get() == 0:
         # Make unselected when state is 0
             seat["bg"] = "white"
             selected_seats.pop()
-        if seat_state.get() == 3:
+        elif seat_state.get() == 3:
         # Make disabled seat selected when state is 2
             seat["bg"] = "green"
             selected_seats.append((str(lett) + str(seat_position["column"]+1)))          
-        if seat_state.get() == 2:
+        elif seat_state.get() == 2:
         # Make disabled seat unselected when state is 3
             seat["bg"] = "yellow"
             selected_seats.pop()
@@ -246,45 +246,74 @@ class SeatMaker:
 
 # Creates a column of seats when column value inputted to class
     def __init__(self, location, column):
-        self.bg = "white"
+        self.bg_1 = "white"
+        self.bg_2 = "white"
+        self.bg_3 = "white"
+        self.bg_4 = "white"
+        self.bg_5 = "white"
         self.width_seat = "4"
         self.height_seat = "2"
-        self.seat_1_state = tk.IntVar(value=4)
+        self.seat_1_state = tk.IntVar()
         self.seat_2_state = tk.IntVar()
         self.seat_3_state = tk.IntVar()
         self.seat_4_state = tk.IntVar()
         self.seat_5_state = tk.IntVar()
 
+        self.booked_seat_plac = r.randint(1, 6)
+        if self.booked_seat_plac == 1:
+            self.bg_1 = "red"
+        elif self.booked_seat_plac == 2:
+            self.bg_2 = 'red'
+        elif self.booked_seat_plac == 3:
+            self.bg_3 = 'red'
+        elif self.booked_seat_plac == 4:
+            self.bg_4 = 'red'
+        else:
+            self.bg_5 = 'red'
+        
+        
 
-
-        self.seat_button_1 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1))
+        self.seat_button_1 = tk.Button(location, background=self.bg_1, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1))
         self.seat_button_1.grid(row = 0, column=column, pady=12, padx=10)
 
-        self.seat_button_2 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_2_state, self.seat_button_2))
+        if self.seat_button_1['bg'] == 'red':
+            self.seat_button_1['state'] = 'disabled'
+        else:
+            pass
+
+        self.seat_button_2 = tk.Button(location, background=self.bg_2, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_2_state, self.seat_button_2))
         self.seat_button_2.grid(row = 1, column=column, pady=12, padx=10)
 
-        self.seat_button_3 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_3_state, self.seat_button_3))
+        if self.seat_button_2['bg'] == 'red':
+            self.seat_button_2['state'] = 'disabled'
+        else:
+            pass
+
+        self.seat_button_3 = tk.Button(location, background=self.bg_3, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_3_state, self.seat_button_3))
         self.seat_button_3.grid(row = 2, column=column, pady=12, padx=10)
 
-        self.seat_button_4 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_4_state, self.seat_button_4))
-        self.seat_button_4.grid(row = 3, column=column, pady=12, padx=10)
+        
+        if self.seat_button_3['bg'] == 'red':
+            self.seat_button_3['state'] = 'disabled'
+        else:
+            pass
 
-        self.seat_button_5 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_5_state, self.seat_button_5))
+        self.seat_button_4 = tk.Button(location, background=self.bg_4, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_4_state, self.seat_button_4))
+        self.seat_button_4.grid(row = 3, column=column, pady=12, padx=10)
+        
+        if self.seat_button_4['bg'] == 'red':
+            self.seat_button_4['state'] = 'disabled'
+        else:
+            pass        
+
+        self.seat_button_5 = tk.Button(location, background=self.bg_5, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_5_state, self.seat_button_5))
         self.seat_button_5.grid(row = 4, column=column, pady=12, padx=10)
 
-        # Disables seats
-        # Make random seats disabled
-        if self.seat_1_state.get() == 4:
-            self.seat_button_1.config(state="disabled", bg="red")
-        
-        random_booked = r.randint(1, 5)
+        if self.seat_button_5['bg'] == 'red':
+            self.seat_button_5['state'] = 'disabled'
+        else:
+            pass
 
-        # all_states = [self.seat_1_state["value"], self.seat_2_state["value"], self.seat_3_state["value"], self.seat_4_state["value"], self.seat_5_state["value"]]
-        # random_state = [2, 3, 4]
-        # # for i in range(x):
-        #     random_seat = r.choice(all_states)
-        #     print(random_seat)
-        #     random_seat.set(r.choice(random_state))
 
 
 
@@ -302,14 +331,22 @@ column_ten_seats = SeatMaker(seat_container, 9)
 column_eleven_seats = SeatMaker(seat_container, 10)
 column_twelve_seats = SeatMaker(seat_container, 11)
 
+column_eleven_seats.seat_button_5["bg"] = "yellow"
+
 # Setting disability chairs
 # by getting column number and seat(row 1-5)
-column_one_seats.seat_5_state.set(2)
-column_two_seats.seat_5_state.set(2)
-column_three_seats.seat_5_state.set(2)
-column_ten_seats.seat_5_state.set(2)
-column_eleven_seats.seat_5_state.set(2)
-column_twelve_seats.seat_5_state.set(2)
+# column_one_seats.seat_5_state.set(2)
+# column_one_seats.seat_button_5['bg'] = "yellow"
+# column_two_seats.seat_5_state.set(2)
+# column_two_seats.seat_button_5['bg'] = "yellow"
+# column_three_seats.seat_5_state.set(2)
+# column_three_seats.seat_button_5['bg'] = "yellow"
+# column_ten_seats.seat_5_state.set(2)
+# column_ten_seats.seat_button_5['bg'] = "yellow"
+# column_eleven_seats.seat_5_state.set(2)
+# column_eleven_seats.seat_button_5['bg'] = "yellow"
+# column_twelve_seats.seat_5_state.set(2)
+# column_twelve_seats.seat_button_5['bg'] = "yellow"
 
 # Creates labels for rows and seat number
 A_label = tk.Label(seat_container, text="A", font=(font_name, 24), background=img_bg, fg="white")
