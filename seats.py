@@ -50,9 +50,8 @@ def screen_forward():
         stored_seats.write("Amount of selected seats:\n")
         stored_seats.write(f"{len(selected_seats)}\n")
         stored_seats.write("Selected seats:\n")
-        stored_seats.write(session_label["text"])
-        # for seat in selected_seats:
-        #     stored_seats.write(seat+"\n")
+        for seat in selected_seats:
+            stored_seats.write(seat+"\n")
         stored_seats.close()
         
         seats.pack_forget()
