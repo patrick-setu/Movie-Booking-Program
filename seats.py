@@ -57,6 +57,13 @@ def screen_forward():
         seats.pack_forget()
         import tickets as ts
         ts.tickets.pack(expand=True, fill="both")
+        print("yes")
+
+        seat_data = open("seat_data.txt", "r")
+        all_lines = seat_data.readlines()
+        seat_data.close()
+
+        ts.seat_amt['text'] = f"Seats selected: {all_lines[1]}"
 
         # Displays selected movie title on next page
         if "Spider" in movie_title.cget("text"):
@@ -201,6 +208,7 @@ class SeatMaker:
             selected_seats.sort()
         else:
             seat["bg"] = "white"
+            print(seat["bg"])
             selected_seats.pop()
         selected.config(text=str(seat['bg']))
 
@@ -246,6 +254,8 @@ row_nine_seats = SeatMaker(seat_container, 8)
 row_ten_seats = SeatMaker(seat_container, 9)
 row_eleven_seats = SeatMaker(seat_container, 10)
 row_twelve_seats = SeatMaker(seat_container, 11)
+
+row_one_seats.seat_button_5['bg'] = "yellow"
 
 
 # Creates labels for rows and seat number
