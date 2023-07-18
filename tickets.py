@@ -34,10 +34,15 @@ costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
 tot = 5
 adt_tickets = 0
+tot = 5
+adt_tickets = 0
 chd_tickets = 0
 stdn_tickets = 0
 psr_tickets = 0
 
+seat_data = open("seat_data.txt", "r")
+all_lines = seat_data.readlines()
+seat_data.close()
 
 def screen_back():
     tickets.pack_forget()
@@ -110,43 +115,19 @@ class seat_type():
         self.lab.config(text="hello")
 
 
-    def increase(self):
-        print(self.total_seats)
-        if self.total_seats > 0 and self.type_of_ticket <= 60:
-            self.total_seats -= 1
-            print(self.total_seats)
-            self.type_of_ticket += 1
-        else:
-            print("UR DUMB")
-
-        self.lab.config(text=self.type_of_ticket)
-        seat_amt['text'] = f"Seats selected: {self.total_seats}"
+# class seat_type:
 
         return self.total_seats, self.type_of_ticket
 
 
-    def decrease(self):
-        if self.type_of_ticket > 0 and self.type_of_ticket <= self.total_seats:
-            self.type_of_ticket -= 1
-            self.total_seats += 1
-        else:
-            print("UR DUMB")
-
-        self.lab.config(text=self.type_of_ticket)
-        seat_amt["text"] = f"Seats selected: {self.total_seats}"
-
-        return self.total_seats, self.type_of_ticket
-
-    def __init__(self, location, type_of_ticket, total_seats = seats):
-        self.location = location
-        self.type_of_ticket = type_of_ticket
-        self.total_seats = total_seats
-        print(self.type_of_ticket)
-        self.decr = create_button(self.location, "-", fg_col, btn_col, 0.7, 0.5, self.decrease)
-        self.lab = tk.Label(self.location, text=self.type_of_ticket, fg=fg_col, bg="white", height=2,
-                            width=3)
-        place(self.lab, 0.8, 0.5)
-        self.incr = create_button(self.location, "+", fg_col, btn_col, 0.9, 0.5, self.increase)
+#     def __init__(self, location, type_of_ticket):
+#         self.location = location
+#         self.type_of_ticket = type_of_ticket
+#         self.decr = create_button(self.location, "-", fg_col, btn_col, 0.7, 0.5, None)
+#         self.lab = tk.Label(self.location, text=None, fg=fg_col, bg="white", height=2,
+#                             width=3)
+#         place(self.lab, 0.8, 0.5)
+#         self.incr = create_button(self.location, "+", fg_col, btn_col, 0.9, 0.5)
 
 
 
