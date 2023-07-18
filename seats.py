@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import random as r
 
 # Constant colour shorthands
 bg_col = "#134074"
@@ -21,8 +22,11 @@ first = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n1:00pm"
 second = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n2:00pm"
 third = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n\n3:00pm"
 
-class seat_label:
+# Creating lists for random booked seats
+letters = [ ]
 
+class seat_label:
+    # Shows keys for different seat availabilities
     def __init__(self, location, bg, x, y,):
         self.location = location
         self.bg = bg
@@ -46,18 +50,18 @@ def screen_forward():
     if len(selected_seats) < 1:
         messagebox.showerror("Error", "No seats have been selected")
     else:
+        selected_seats.sort()
         stored_seats = open("seat_data.txt", "w")
         stored_seats.write("Amount of selected seats:\n")
         stored_seats.write(f"{len(selected_seats)}\n")
-        stored_seats.write("Selected seats:\n")
-        for seat in selected_seats:
-            stored_seats.write(seat+"\n")
+        stored_seats.write(f"Selected seats:\n{selected_seats}")
+        # for seat in selected_seats:
+        #     stored_seats.write(seat+"\n")
         stored_seats.close()
         
         seats.pack_forget()
         import tickets as ts
         ts.tickets.pack(expand=True, fill="both")
-        print("yes")
 
         seat_data = open("seat_data.txt", "r")
         all_lines = seat_data.readlines()
@@ -89,6 +93,11 @@ def screen_forward():
         else:
             ts.time_label.config(text=third)
 
+        # Lets each ticket type know the max value/selected seat amount
+        ts.adt.total_seats = int(all_lines[1])
+        ts.chd.total_seats = int(all_lines[1])
+        ts.stdn.total_seats = int(all_lines[1])
+        ts.psr.total_seats = int(all_lines[1])
 
 # Help window
 def pop_up():
@@ -101,14 +110,14 @@ def pop_up():
     help_bg.place(relx=0.5, rely=0.5, anchor="center")
 
     title = tk.Label(help_bg, text = "Seat selection help", fg=btn_col, background=img_bg,
-                     font=(font_name, 30))
+                     font=(font_name, 20))
     title.place(relx=0.5, rely=0.2, anchor="center")
 
     body_text = tk.Label(help_bg, text="Click to select seats\n"
                          "(Maximum of 60 unless reserved)\n\n"
                          "Please check availability keys\n"
                          "then press confirm when done or press the back button", wraplength=300,
-                         fg=btn_col, bg=img_bg, font=(font_name, 20), justify="center")
+                         fg=btn_col, bg=img_bg, font=(font_name, 10), justify="center")
     body_text.place(relx=0.5, rely=0.5, anchor="center")
 
     help.grab_set()
@@ -116,9 +125,8 @@ def pop_up():
 
 
 
-
 class create_button:
-
+    # Makes buttons
     def __init__(self, location, text, fg, bg, x, y, comm = None):
         self.location = location
         self.text = text
@@ -129,7 +137,7 @@ class create_button:
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
                              fg=self.fg, command= self.comm, height = 2,
-                             width=3, borderwidth=0,
+                             width=5, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -145,7 +153,7 @@ seats = tk.Frame(window, bg=bg_col)
 image = tk.Label(seats, image=None, bg=bg_col)
 image.place(relx=0.1, rely=0.15, anchor="center")
 
-movie_title = tk.Label(seats, text=None, font=(font_name, 40), fg=btn_col, bg=bg_col)
+movie_title = tk.Label(seats, text=None, font=(font_name, 30), fg=btn_col, bg=bg_col)
 
 screen_label = tk.Label(seats, text="Seats", fg=btn_col, bg=bg_col, font=(font_name, 25))
 screen_label.place(relx=0.6, rely=0.3, anchor="center")
@@ -198,116 +206,161 @@ class SeatMaker:
         pos = v.index(seat_position["row"])
         lett = k[pos]
         
+        # Program turns seat (un)selected based on state
         if seat_state.get() == 0:
+            # Turning unselected into selected state
             seat_state.set(1)
-        else:
+        elif seat_state.get() == 1 :
+            # Turning selected into unselected state
             seat_state.set(0)
+        elif seat_state.get() == 2:
+            # Turning disabled unselected into selected state
+            seat_state.set(3)
+        else:
+            # Turning disabled selected into unselected state
+            seat_state.set(2)
+    
+
+
         if seat_state.get() == 1:
+        # Make selected when state is 1
             seat["bg"] = "green"
             selected_seats.append((str(lett) + str(seat_position["column"]+1)))
-            selected_seats.sort()
-        else:
+        if seat_state.get() == 0:
+        # Make unselected when state is 0
             seat["bg"] = "white"
-            print(seat["bg"])
             selected_seats.pop()
-        selected.config(text=str(seat['bg']))
+        if seat_state.get() == 3:
+        # Make disabled seat selected when state is 2
+            seat["bg"] = "green"
+            selected_seats.append((str(lett) + str(seat_position["column"]+1)))          
+        if seat_state.get() == 2:
+        # Make disabled seat unselected when state is 3
+            seat["bg"] = "yellow"
+            selected_seats.pop()
+        
+        selected["text"] = seat["bg"]
+
 
 
 
 # Creates a column of seats when column value inputted to class
-    def __init__(self, master, column):
+    def __init__(self, location, column):
         self.bg = "white"
         self.width_seat = "4"
         self.height_seat = "2"
-        self.seat_1_state = tk.IntVar()
+        self.seat_1_state = tk.IntVar(value=4)
         self.seat_2_state = tk.IntVar()
         self.seat_3_state = tk.IntVar()
         self.seat_4_state = tk.IntVar()
         self.seat_5_state = tk.IntVar()
 
-        self.seat_button_1 = tk.Button(master, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1))
+
+
+        self.seat_button_1 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1))
         self.seat_button_1.grid(row = 0, column=column, pady=12, padx=10)
 
-        self.seat_button_2 = tk.Button(master, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_2_state, self.seat_button_2))
+        self.seat_button_2 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_2_state, self.seat_button_2))
         self.seat_button_2.grid(row = 1, column=column, pady=12, padx=10)
 
-        self.seat_button_3 = tk.Button(master, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_3_state, self.seat_button_3))
+        self.seat_button_3 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_3_state, self.seat_button_3))
         self.seat_button_3.grid(row = 2, column=column, pady=12, padx=10)
 
-        self.seat_button_4 = tk.Button(master, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_4_state, self.seat_button_4))
+        self.seat_button_4 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_4_state, self.seat_button_4))
         self.seat_button_4.grid(row = 3, column=column, pady=12, padx=10)
 
-        self.seat_button_5 = tk.Button(master, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_5_state, self.seat_button_5))
+        self.seat_button_5 = tk.Button(location, background=self.bg, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_5_state, self.seat_button_5))
         self.seat_button_5.grid(row = 4, column=column, pady=12, padx=10)
+
+        # Disables seats
+        # Make random seats disabled
+        if self.seat_1_state.get() == 4:
+            self.seat_button_1.config(state="disabled", bg="red")
         
+        random_booked = r.randint(1, 5)
 
-# Creates 10 rows of seats
-row_one_seats = SeatMaker(seat_container, 0)
-row_two_seats = SeatMaker(seat_container, 1)
-row_three_seats = SeatMaker(seat_container, 2)
-row_four_seats = SeatMaker(seat_container, 3)
-row_five_seats = SeatMaker(seat_container, 4)
-row_six_seats = SeatMaker(seat_container, 5)
-row_seven_seats = SeatMaker(seat_container, 6)
-row_eight_seats = SeatMaker(seat_container, 7)
-row_nine_seats = SeatMaker(seat_container, 8)
-row_ten_seats = SeatMaker(seat_container, 9)
-row_eleven_seats = SeatMaker(seat_container, 10)
-row_twelve_seats = SeatMaker(seat_container, 11)
+        # all_states = [self.seat_1_state["value"], self.seat_2_state["value"], self.seat_3_state["value"], self.seat_4_state["value"], self.seat_5_state["value"]]
+        # random_state = [2, 3, 4]
+        # # for i in range(x):
+        #     random_seat = r.choice(all_states)
+        #     print(random_seat)
+        #     random_seat.set(r.choice(random_state))
 
-row_one_seats.seat_button_5['bg'] = "yellow"
 
+
+# Creates 12 columns of 5 rows of seats
+column_one_seats = SeatMaker(seat_container, 0)
+column_two_seats = SeatMaker(seat_container, 1)
+column_three_seats = SeatMaker(seat_container, 2)
+column_four_seats = SeatMaker(seat_container, 3)
+column_five_seats = SeatMaker(seat_container, 4)
+column_six_seats = SeatMaker(seat_container, 5)
+column_seven_seats = SeatMaker(seat_container, 6)
+column_eight_seats = SeatMaker(seat_container, 7)
+column_nine_seats = SeatMaker(seat_container, 8)
+column_ten_seats = SeatMaker(seat_container, 9)
+column_eleven_seats = SeatMaker(seat_container, 10)
+column_twelve_seats = SeatMaker(seat_container, 11)
+
+# Setting disability chairs
+# by getting column number and seat(row 1-5)
+column_one_seats.seat_5_state.set(2)
+column_two_seats.seat_5_state.set(2)
+column_three_seats.seat_5_state.set(2)
+column_ten_seats.seat_5_state.set(2)
+column_eleven_seats.seat_5_state.set(2)
+column_twelve_seats.seat_5_state.set(2)
 
 # Creates labels for rows and seat number
-A_label = tk.Label(seat_container, text="A", font=("Aerial", 24), background=img_bg, fg="white")
+A_label = tk.Label(seat_container, text="A", font=(font_name, 24), background=img_bg, fg="white")
 A_label.grid(row=0, column=12, sticky="NSWE", padx=2, pady=12)
 
-B_label = tk.Label(seat_container, text="B", font=("Aerial", 24), background=img_bg, fg="white")
+B_label = tk.Label(seat_container, text="B", font=(font_name, 24), background=img_bg, fg="white")
 B_label.grid(row=1, column=12, sticky="NSWE", padx=2, pady=12)
 
-C_label = tk.Label(seat_container, text="C", font=("Aerial", 24), background=img_bg, fg="white")
+C_label = tk.Label(seat_container, text="C", font=(font_name, 24), background=img_bg, fg="white")
 C_label.grid(row=2, column=12, sticky="NSWE", padx=2, pady=12)
 
-D_label = tk.Label(seat_container, text="D", font=("Aerial", 24), background=img_bg, fg="white")
+D_label = tk.Label(seat_container, text="D", font=(font_name, 24), background=img_bg, fg="white")
 D_label.grid(row=3, column=12, sticky="NSWE", padx=2, pady=12)
 
-E_label = tk.Label(seat_container, text="E", font=("Aerial", 24), background=img_bg, fg="white")
+E_label = tk.Label(seat_container, text="E", font=(font_name, 24), background=img_bg, fg="white")
 E_label.grid(row=4, column=12, sticky="NSWE", padx=2, pady=12)
 
-label_1 = tk.Label(seat_container, text="1", font=("Aerial", 24), background=img_bg, fg="white")
+label_1 = tk.Label(seat_container, text="1", font=(font_name, 24), background=img_bg, fg="white")
 label_1.grid(row=8, column=0, sticky="NSWE", padx=2, pady=1)
 
-label_2 = tk.Label(seat_container, text="2", font=("Aerial", 24), background=img_bg, fg="white")
+label_2 = tk.Label(seat_container, text="2", font=(font_name, 24), background=img_bg, fg="white")
 label_2.grid(row=8, column=1, sticky="NSWE", padx=2, pady=1)
 
-label_3 = tk.Label(seat_container, text="3", font=("Aerial", 24), background=img_bg, fg="white")
+label_3 = tk.Label(seat_container, text="3", font=(font_name, 24), background=img_bg, fg="white")
 label_3.grid(row=8, column=2, sticky="NSWE", padx=2, pady=1)
 
-label_4 = tk.Label(seat_container, text="4", font=("Aerial", 24), background=img_bg, fg="white")
+label_4 = tk.Label(seat_container, text="4", font=(font_name, 24), background=img_bg, fg="white")
 label_4.grid(row=8, column=3, sticky="NSWE", padx=2, pady=1)
 
-label_5 = tk.Label(seat_container, text="5", font=("Aerial", 24), background=img_bg, fg="white")
+label_5 = tk.Label(seat_container, text="5", font=(font_name, 24), background=img_bg, fg="white")
 label_5.grid(row=8, column=4, sticky="NSWE", padx=2, pady=1)
 
-label_6 = tk.Label(seat_container, text="6", font=("Aerial", 24), background=img_bg, fg="white")
+label_6 = tk.Label(seat_container, text="6", font=(font_name, 24), background=img_bg, fg="white")
 label_6.grid(row=8, column=5, sticky="NSWE", padx=2, pady=1)
 
-label_7 = tk.Label(seat_container, text="7", font=("Aerial", 24), background=img_bg, fg="white")
+label_7 = tk.Label(seat_container, text="7", font=(font_name, 24), background=img_bg, fg="white")
 label_7.grid(row=8, column=6, sticky="NSWE", padx=2, pady=1)
 
-label_8 = tk.Label(seat_container, text="8", font=("Aerial", 24), background=img_bg, fg="white")
+label_8 = tk.Label(seat_container, text="8", font=(font_name, 24), background=img_bg, fg="white")
 label_8.grid(row=8, column=7, sticky="NSWE", padx=2, pady=1)
 
-label_9 = tk.Label(seat_container, text="9", font=("Aerial", 24), background=img_bg, fg="white")
+label_9 = tk.Label(seat_container, text="9", font=(font_name, 24), background=img_bg, fg="white")
 label_9.grid(row=8, column=8, sticky="NSWE", padx=2, pady=1)
 
-label_10 = tk.Label(seat_container, text="10", font=("Aerial", 24), background=img_bg, fg="white")
+label_10 = tk.Label(seat_container, text="10", font=(font_name, 24), background=img_bg, fg="white")
 label_10.grid(row=8, column=9, sticky="NSWE", padx=2, pady=1)
 
-label_11 = tk.Label(seat_container, text="11", font=("Aerial", 24), background=img_bg, fg="white")
+label_11 = tk.Label(seat_container, text="11", font=(font_name, 24), background=img_bg, fg="white")
 label_11.grid(row=8, column=10, sticky="NSWE", padx=2, pady=1)
 
-label_12 = tk.Label(seat_container, text="12", font=("Aerial", 24), background=img_bg, fg="white")
+label_12 = tk.Label(seat_container, text="12", font=(font_name, 24), background=img_bg, fg="white")
 label_12.grid(row=8, column=11, sticky="NSWE", padx=2, pady=1)
 
 

@@ -23,12 +23,6 @@ first = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n1:00pm"
 second = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n2:00pm"
 third = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n3:00pm"
 
-# Reading text file to get selected seat amount
-seat_data = open("seat_data.txt", "r")
-all_lines = seat_data.readlines()
-seat_data.close()
-
-seats = int(all_lines[1])
 
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
@@ -38,6 +32,7 @@ chd_tickets = 0
 stdn_tickets = 0
 psr_tickets = 0
 
+seats = 0
 
 def screen_back():
     tickets.pack_forget()
@@ -70,6 +65,26 @@ def screen_forward():
     else:
         ct.time_label.config(text="hello")
 
+    # Updates into text file:
+    # total cost, each ticket amount, each ticket type total
+    # stored_data = open("seat_data.txt", "a")
+    # stored_data.write(f"x{adt_tickets} Adult \t{adt_tickets*costs['adult']}\n")
+    # stored_data.write(f"x{chd_tickets} Child \t{chd_tickets*costs['child']}\n")
+    # stored_data.write(f"x{stdn_tickets} Student \t{stdn_tickets*costs['student']}\n")
+    # stored_data.write(f"x{psr_tickets} Pensioner    {psr_tickets*costs['pensioner']}\n")
+    # stored_data.close()
+
+    # a = open("seat_data.txt", "r")
+    # sum_text = a.readlines()
+    # a.close()
+
+    # b = sum_text[4]
+    # c = sum_text[5]
+    # d = sum_text[6]
+    # e = sum_text[7]
+
+    # q = f"{b}\n,{c}\n,{d}\n, {e}"
+    # ct.show_summary['text'] = q
 
 # fix
 
@@ -83,7 +98,7 @@ class place:
         self.widget.place(relx=self.x, rely=self.y, anchor="center")
 
 class create_button:
-
+    # Makes buttons
     def __init__(self, location, text, fg, bg, x, y, comm = None):
         self.location = location
         self.text = text
@@ -94,7 +109,7 @@ class create_button:
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
                              fg=self.fg, command= self.comm, height = 2,
-                             width=3, borderwidth=0,
+                             width=5, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -102,30 +117,24 @@ class create_button:
 
 
 
-
 class seat_type():
-
-    def test(self):
-        print("hello")
-        self.lab.config(text="hello")
-
-
+    # Class which makes the ticket amount buttons and label
     def increase(self):
+        # Function to increase a ticket type but not exceed lower than selected amount
         print(self.total_seats)
         if self.total_seats > 0 and self.type_of_ticket <= 60:
             self.total_seats -= 1
-            print(self.total_seats)
             self.type_of_ticket += 1
         else:
-            print("UR DUMB")
+            print("error")
 
         self.lab.config(text=self.type_of_ticket)
-        seat_amt['text'] = f"Seats selected: {self.total_seats}"
 
-        return self.total_seats, self.type_of_ticket
+        # # return self.total_seats, self.type_of_ticket
 
 
     def decrease(self):
+        # Function to decrease a ticket type but not exceed higher than selected amount
         if self.type_of_ticket > 0 and self.type_of_ticket <= self.total_seats:
             self.type_of_ticket -= 1
             self.total_seats += 1
@@ -133,21 +142,22 @@ class seat_type():
             print("UR DUMB")
 
         self.lab.config(text=self.type_of_ticket)
-        seat_amt["text"] = f"Seats selected: {self.total_seats}"
 
-        return self.total_seats, self.type_of_ticket
+        # return self.total_seats, self.type_of_ticket
+        pass
 
-    def __init__(self, location, type_of_ticket, total_seats = seats):
+    def __init__(self, location, type_of_ticket, total_seats):
         self.location = location
         self.type_of_ticket = type_of_ticket
         self.total_seats = total_seats
-        print(self.type_of_ticket)
-        self.decr = tk.Button(self.location, text="-", fg=fg_col, bg=btn_col, command=self.decrease)
+        self.decr = tk.Button(self.location, text="-", fg=fg_col, bg=btn_col, command=self.decrease,
+                              height=2, width=3)
         self.decr.place(relx=0.7, rely=0.5, anchor="center")
         self.lab = tk.Label(self.location, text=self.type_of_ticket, fg=fg_col, bg="white", height=2,
-                            width=3)
+                            width=3, font=(font_name, 16))
         self.lab.place(relx=0.8, rely=0.5, anchor="center")
-        self.incr = tk.Button(self.location, text="+", fg=fg_col, bg=btn_col, command=self.increase)
+        self.incr = tk.Button(self.location, text="+", fg=fg_col, bg=btn_col, command=self.increase,
+                              height=2, width=3)
         self.incr.place(relx=0.9, rely=0.5, anchor="center")
 
 
@@ -158,10 +168,10 @@ tickets = tk.Frame(window, bg=bg_col, cursor="heart")
 
 
 # Specified movie and session time
-movie_title = tk.Label(tickets, text=None, font=(font_name, 30), fg=btn_col, bg=bg_col,
+movie_title = tk.Label(tickets, text=None, font=(font_name, 20), fg=btn_col, bg=bg_col,
                        wraplength=200, justify="center")
 
-time_label = tk.Label(tickets, text=None, justify="center", font=(font_name, 25),
+time_label = tk.Label(tickets, text=None, justify="center", font=(font_name, 15),
                       fg=btn_col, bg=bg_col)
 place(time_label, 0.1, 0.675)
 
@@ -171,7 +181,7 @@ place(image, 0.1, 0.3)
 
 # Page widgets
 
-title_label = tk.Label(tickets, text="Tickets", font=(font_name, 40), fg=btn_col, bg=bg_col)
+title_label = tk.Label(tickets, text="Tickets", font=(font_name, 30), fg=btn_col, bg=bg_col)
 place(title_label, 0.5, 0.075)
 
 fra = tk.Label(tickets, image=widget_bg, bg=bg_col)
@@ -185,32 +195,32 @@ place(seat_amt, 0.5, 0.1)
 adult = tk.Label(fra, image=type_bg, bg=img_bg)
 place(adult, 0.5, 0.2)
 adt_info = tk.Label(adult, text="Adult \t ${:.2f}".format(costs["adult"]), fg=fg_col, bg=btn_col,
-                    font=(font_name, 30))
+                    font=(font_name, 20))
 place(adt_info, 0.3, 0.5)
 
 child = tk.Label(fra, image=type_bg, bg=img_bg)
 place(child, 0.5, 0.4)
 chd_info = tk.Label(child, text="Child \t ${:.2f}".format(costs["child"]), fg=fg_col, bg=btn_col,
-                    font=(font_name, 30))
+                    font=(font_name, 20))
 place(chd_info, 0.3, 0.5)
 
 student = tk.Label(fra, image=type_bg, bg=img_bg)
 place(student, 0.5, 0.6)
 stdn_info = tk.Label(student, text="Student \t ${:.2f}".format(costs["student"]), fg=fg_col, bg=btn_col,
-                    font=(font_name, 30))
+                    font=(font_name, 20))
 place(stdn_info, 0.3, 0.5)
 
 pensioner = tk.Label(fra, image=type_bg, bg=img_bg)
 place(pensioner, 0.5, 0.8)
-psr_info = tk.Label(pensioner, text="Pensioner \t ${:.2f}".format(costs["pensioner"]), fg=fg_col, bg=btn_col,
-                    font=(font_name, 30))
+psr_info = tk.Label(pensioner, text="Pensioner  ${:.2f}".format(costs["pensioner"]), fg=fg_col, bg=btn_col,
+                    font=(font_name, 20))
 place(psr_info, 0.3, 0.5)
 
 
-adt = seat_type(adult, adt_tickets)
-chd = seat_type(child, chd_tickets)
-stdn = seat_type(student, stdn_tickets)
-psr = seat_type(pensioner, psr_tickets)
+adt = seat_type(adult, adt_tickets, None)
+chd = seat_type(child, chd_tickets, None)
+stdn = seat_type(student, stdn_tickets, None)
+psr = seat_type(pensioner, psr_tickets, None)
 
 
 # find way to save ticket amounts

@@ -32,7 +32,7 @@ class place:
         self.widget.place(relx=self.x, rely=self.y, anchor="center")
 
 class create_button:
-
+    # Makes buttons
     def __init__(self, location, text, fg, bg, x, y, comm = None):
         self.location = location
         self.text = text
@@ -43,7 +43,7 @@ class create_button:
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
                              fg=self.fg, command= self.comm, height = 2,
-                             width=3, borderwidth=0,
+                             width=5, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -51,40 +51,24 @@ class create_button:
 # Page widgets
 
 display_bg = tk.Label(contact, image=ticket_bg, bg=bg_col, borderwidth=0)
-# display_bg.pack
-# display_bg.pack_propagate(False)
 place(display_bg, 0.5, 0.25)
 
 
 # Specified movie and session time
-image = tk.Label(display_bg, image=None)
+image = tk.Label(display_bg)
 place(image, 0.1, 0.3)
-
-movie_title = tk.Label(display_bg, text=None, font=(font_name, 16), fg=btn_col, bg=img_bg,
+movie_title = tk.Label(display_bg, font=(font_name, 16), fg=btn_col, bg=img_bg,
                        wraplength=150, justify="center")
 place(movie_title, 0.1, 0.7)
-
-time_label = tk.Label(display_bg, text=None, justify="center", font=(font_name, 16),
+time_label = tk.Label(display_bg, justify="center", font=(font_name, 16),
                       fg=btn_col, bg=img_bg)
 place(time_label, 0.1, 0.9)
 
 
 
-# frame_tickets = tk.Listbox(display_bg, bg=img_bg, cursor= "mouse",
-#                            height=1, width=10)
-# frame_tickets.place(relx=0.6, rely=0.3, anchor="n")
-
-
-
-show_tickets = tk.Text(display_bg, height=20, width=70, fg="red",
-                       bg="yellow", state="disabled")
-
-for i in range(100):
-    show_tickets.insert(tk.END, "hello\n")
-place(show_tickets, 0.6, 0.6)
-scroll = tk.Scrollbar(show_tickets)
-place(scroll, 0.9, 0)
-scroll.config(command=show_tickets.yview)
+show_summary = tk.Label(display_bg, text=None, width=40, fg=fg_col, bg=btn_col,
+                        font=(font_name, 20), justify="left", state="disabled")
+show_summary.place(relx=0.6, rely=0.55, anchor="center")
 
 
 
