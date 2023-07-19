@@ -6,7 +6,7 @@ from tkinter import font
 # Creating and setting tinker settings
 window = tk.Tk()
 window.title("Movie Booking Program")
-window.geometry("996x700")
+window.geometry("996x720")
 window.config(bg="#EEF4ED")
 # window.resizable(False, False)
 

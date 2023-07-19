@@ -47,8 +47,8 @@ class create_button:
         self.y = y
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=self.fg, command= self.comm, height = 2,
-                             width=5, borderwidth=0,
+                             fg=self.fg, command= self.comm, height = 1,
+                             width=7, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -73,7 +73,7 @@ title_label = tk.Label(display_bg, text="Tickets", font=(font_name, 30), fg=fg_c
 place(title_label, 0.6, 0.1)
 
 # Displays each ticket total and cost
-show_summary = tk.Label(display_bg, text=None, width=30, fg=fg_col, bg=btn_col,
+show_summary = tk.Label(display_bg, width=30, fg=fg_col, bg=btn_col,
                         font=(font_name, 20))
 show_summary.place(relx=0.6, rely=0.5, anchor="center")
 
@@ -112,5 +112,5 @@ cvc_entry = tk.Entry(contact, fg="black", font=(font_name, 16), width=45,
                      state= "disabled")
 place(cvc_entry, 0.5, 0.88)
 
-back = create_button(contact, "Back", fg_col, btn_col, 0.45, 0.95, comm=screen_back)
-forward = create_button(contact, "Confirm", fg_col, btn_col, 0.55, 0.95, comm=screen_forward)
+back = create_button(contact, "Back", fg_col, btn_col, 0.4, 0.96, comm=screen_back)
+forward = create_button(contact, "Confirm", fg_col, btn_col, 0.6, 0.96, comm=screen_forward)

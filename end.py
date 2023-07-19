@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 
 # Constant colour shorthands
 bg_col = "#134074"
@@ -31,8 +32,8 @@ class create_button:
         self.y = y
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=self.fg, command= self.comm, height = 2,
-                             width=8, borderwidth=0,
+                             fg=self.fg, command= self.comm, height = 1,
+                             width=15, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -46,5 +47,5 @@ text = tk.Label(end, text="Booking has been confirmed!\n\n"
                 width=30, height=13)
 place(text, 0.5, 0.45)
 
-close = create_button(end, "Close page", fg_col, bg_col, 0.5, 0.9,
-                      lambda: end.pack_forget())
+close = create_button(end, "Close page", fg_col, btn_col, 0.5, 0.9,
+                      lambda: sys.exit())

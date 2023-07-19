@@ -126,8 +126,8 @@ class create_button:
         self.y = y
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=self.fg, command= self.comm, height = 2,
-                             width=5, borderwidth=0,
+                             fg=self.fg, command= self.comm, height = 1,
+                             width=7, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -393,7 +393,7 @@ label_12.grid(row=8, column=11, sticky="NSWE", padx=2, pady=1)
 
 
 # Page controlling buttons
-back = create_button(seats, "Back", fg_col, btn_col, 0.45, 0.95, screen_back)
-forward = create_button(seats, "Confirm", fg_col, btn_col, 0.55, 0.95, screen_forward)
+back = create_button(seats, "Back", fg_col, btn_col, 0.4, 0.96, screen_back)
+forward = create_button(seats, "Confirm", fg_col, btn_col, 0.6, 0.96, screen_forward)
 
-top_help = create_button(seats, "Help?", img_bg, btn_col, 0.1, 0.95, pop_up)
+top_help = create_button(seats, "Help?", img_bg, btn_col, 0.1, 0.96, pop_up)

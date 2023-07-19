@@ -65,7 +65,7 @@ def screen_forward():
     stored_data.write("x{} Adult    \t${:.2f}\n".format(adt_tickets, (adt_tickets*costs['adult'])))
     stored_data.write("x{} Child    \t${:.2f}\n".format(chd_tickets, (chd_tickets*costs['child'])))
     stored_data.write("x{} Student \t${:.2f}\n".format(stdn_tickets, (stdn_tickets*costs['student'])))
-    stored_data.write("x{} Pensioner    ${:.2f}\n".format(psr_tickets, (psr_tickets*costs['pensioner'])))
+    stored_data.write("x{} Pensioner \t${:.2f}\n".format(psr_tickets, (psr_tickets*costs['pensioner'])))
     stored_data.write("Total: ${:.2f}".format((adt_tickets*costs['adult'])+(chd_tickets*costs['child'])+(stdn_tickets*costs['student'])+(psr_tickets*costs['pensioner'])))
     stored_data.close()
 
@@ -73,13 +73,15 @@ def screen_forward():
     sum_text = txt.readlines()
     txt.close()
 
+    print(sum_text)
+
     a = sum_text[4]
     c = sum_text[5]
     s = sum_text[6]
     p = sum_text[7]
     t = sum_text[8]
 
-    display_sum= "\n"+ f"{a}{c}{s}{p}"
+    display_sum = f"{a}{c}{s}{p}"
     ct.show_summary['text'] = display_sum
     ct.total['text'] = t
 
@@ -107,8 +109,8 @@ class create_button:
         self.y = y
         self.comm = comm
         self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=self.fg, command= self.comm, height = 2,
-                             width=5, borderwidth=0,
+                             fg=self.fg, command= self.comm, height = 1,
+                             width=7, borderwidth=0,
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
@@ -172,7 +174,7 @@ place(movie_title, 0.15, 0.5)
 
 time_label = tk.Label(tickets, text=None, justify="center", font=(font_name, 20),
                       fg=btn_col, bg=bg_col)
-place(time_label, 0.15, 0.6)
+place(time_label, 0.15, 0.7)
 
 image = tk.Label(tickets, image=None, bg=bg_col)
 place(image, 0.15, 0.3)
