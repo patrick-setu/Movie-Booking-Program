@@ -37,26 +37,26 @@ class create_button:
         # Displays selected movie title on next page
         if self.movie_num == 1:
             se.movie_title.config(text="Spider-Man: Across the Spider-Verse")
-            se.movie_title.place(relx=0.525, rely=0.1, anchor="center")
+            se.movie_title.place(relx=0.525, rely=0.075, anchor="center")
             se.image.config(image=spider)
 
         elif self.movie_num == 2:
             se.movie_title.config(text="Barbie")
-            se.movie_title.place(relx=0.3, rely=0.1, anchor="center")
+            se.movie_title.place(relx=0.3, rely=0.075, anchor="center")
             se.image.config(image=barbie)
 
         elif self.movie_num == 3:
             se.movie_title.config(text="The Super Mario Bros. Movie")
-            se.movie_title.place(relx=0.45, rely=0.1, anchor="center")
+            se.movie_title.place(relx=0.45, rely=0.075, anchor="center")
             se.image.config(image=mario)
 
         # Displays time of selected session 
         if self.text == first:
-            se.time_label.config(text=self.text)
+            se.time_label['text'] = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n1:00pm"
         elif self.text == second:
-            se.time_label.config(text=self.text)
+            se.time_label['text'] = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n2:00pm"
         else:
-            se.time_label.config(text=self.text)
+            se.time_label['text'] = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n3:00pm"
 
     def __init__(self, location, text, fg, bg, x, y, movie_num):
         self.location = location

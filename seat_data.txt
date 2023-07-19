@@ -1,4 +1,9 @@
 Amount of selected seats:
-7
+1
 Selected seats:
-['C11', 'C12', 'C5', 'C6', 'C7', 'C8', 'C9']
+['E6']
+x1 Adult    	$10.00
+x1 Child    	$7.50
+x1 Student 	$9.00
+x1 Pensioner    $7.00
+Total: $33.50

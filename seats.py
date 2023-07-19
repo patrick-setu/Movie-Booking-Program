@@ -54,9 +54,7 @@ def screen_forward():
         stored_seats = open("seat_data.txt", "w")
         stored_seats.write("Amount of selected seats:\n")
         stored_seats.write(f"{len(selected_seats)}\n")
-        stored_seats.write(f"Selected seats:\n{selected_seats}")
-        # for seat in selected_seats:
-        #     stored_seats.write(seat+"\n")
+        stored_seats.write(f"Selected seats:\n{selected_seats}\n")
         stored_seats.close()
         
         seats.pack_forget()
@@ -72,26 +70,18 @@ def screen_forward():
         # Displays selected movie title on next page
         if "Spider" in movie_title.cget("text"):
             ts.movie_title.config(text="Spider-Man: Across the Spider-Verse")
-            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
             ts.image.config(image=spider)
 
         elif "Barbie" in movie_title.cget("text"):
             ts.movie_title.config(text="Barbie")
-            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
             ts.image.config(image=barbie)
 
         elif "Mario" in movie_title.cget("text"):
             ts.movie_title.config(text="The Super Mario Bros. Movie")
-            ts.movie_title.place(relx=0.1, rely=0.5, anchor="center")
             ts.image.config(image=mario)
 
         # Displays time of selected session 
-        if time_label.cget("text") == first:
-            ts.time_label.config(text=first)
-        elif time_label.cget("text") == second:
-            ts.time_label.config(text=second)
-        else:
-            ts.time_label.config(text=third)
+        ts.time_label['text'] = time_label['text']
 
         # Lets each ticket type know the max value/selected seat amount
         ts.adt.total_seats = int(all_lines[1])
@@ -156,24 +146,24 @@ image.place(relx=0.1, rely=0.15, anchor="center")
 movie_title = tk.Label(seats, text=None, font=(font_name, 30), fg=btn_col, bg=bg_col)
 
 screen_label = tk.Label(seats, text="Seats", fg=btn_col, bg=bg_col, font=(font_name, 25))
-screen_label.place(relx=0.6, rely=0.3, anchor="center")
+screen_label.place(relx=0.6, rely=0.25, anchor="center")
 
 # Availability labels
 selected = tk.Label(seats, text="Selected", font=(font_name, 25), fg=btn_col, bg=bg_col)
-selected.place(relx=0.3, rely=0.2, anchor="center")
-selected_box = seat_label(seats, "green", 0.23, 0.2)
+selected.place(relx=0.3, rely=0.175, anchor="center")
+selected_box = seat_label(seats, "green", 0.23, 0.175)
 
 booked = tk.Label(seats, text="Booked", font=(font_name, 25), fg=btn_col, bg=bg_col)
-booked.place(relx=0.5, rely=0.2, anchor="center")
-booked_box = seat_label(seats, "red", 0.43, 0.2)
+booked.place(relx=0.5, rely=0.175, anchor="center")
+booked_box = seat_label(seats, "red", 0.43, 0.175)
 
 disability = tk.Label(seats, text="Disability", font=(font_name, 25), fg=btn_col, bg=bg_col)
-disability.place(relx=0.7, rely=0.2, anchor="center")
-disability_box = seat_label(seats, "yellow", 0.63, 0.2)
+disability.place(relx=0.7, rely=0.175, anchor="center")
+disability_box = seat_label(seats, "yellow", 0.63, 0.175)
 
 available = tk.Label(seats, text="Available", font=(font_name, 25), fg=btn_col, bg=bg_col)
-available.place(relx=0.9, rely=0.2, anchor="center")
-available_box = seat_label(seats, "white", 0.83, 0.2)
+available.place(relx=0.9, rely=0.175, anchor="center")
+available_box = seat_label(seats, "white", 0.83, 0.175)
 
 
 # Specified movie and session time
@@ -190,7 +180,7 @@ time_label.place(relx=0.1, rely=0.5, anchor="center")
 # Second frame containing seats
 seat_container = tk.Frame(seats, height=400, width=750, relief="flat",
                           bg=img_bg, bd=5)
-seat_container.place(relx=0.2, rely=0.35)
+seat_container.place(relx=0.2, rely=0.3)
 
 selected_seats = []
 
@@ -273,7 +263,7 @@ class SeatMaker:
         
         
 
-        self.seat_button_1 = tk.Button(location, background=self.bg_1, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1))
+        self.seat_button_1 = tk.Button(location, background=self.bg_1, width=self.width_seat, height=self.height_seat, command =  lambda: self.seat_clicked(self.seat_1_state, self.seat_button_1),)
         self.seat_button_1.grid(row = 0, column=column, pady=12, padx=10)
 
         if self.seat_button_1['bg'] == 'red':

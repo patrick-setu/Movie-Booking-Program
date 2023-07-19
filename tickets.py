@@ -27,12 +27,11 @@ third = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n3:00pm"
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
 tot = 5
-adt_tickets = 0
-chd_tickets = 0
-stdn_tickets = 0
-psr_tickets = 0
+adt_tickets = 1
+chd_tickets = 1
+stdn_tickets = 1
+psr_tickets = 1
 
-seats = 0
 
 def screen_back():
     tickets.pack_forget()
@@ -58,33 +57,31 @@ def screen_forward():
         ct.image.config(image=mario)
 
     # Displays time of selected session 
-    if time_label.cget("text") == first:
-        ct.time_label.config(text=first)
-    elif time_label.cget("text") == second:
-        ct.time_label.config(text=second)
-    else:
-        ct.time_label.config(text="hello")
+    ct.time_label['text'] = time_label['text']
 
     # Updates into text file:
     # total cost, each ticket amount, each ticket type total
-    # stored_data = open("seat_data.txt", "a")
-    # stored_data.write(f"x{adt_tickets} Adult \t{adt_tickets*costs['adult']}\n")
-    # stored_data.write(f"x{chd_tickets} Child \t{chd_tickets*costs['child']}\n")
-    # stored_data.write(f"x{stdn_tickets} Student \t{stdn_tickets*costs['student']}\n")
-    # stored_data.write(f"x{psr_tickets} Pensioner    {psr_tickets*costs['pensioner']}\n")
-    # stored_data.close()
+    stored_data = open("seat_data.txt", "a")
+    stored_data.write("x{} Adult    \t${:.2f}\n".format(adt_tickets, (adt_tickets*costs['adult'])))
+    stored_data.write("x{} Child    \t${:.2f}\n".format(chd_tickets, (chd_tickets*costs['child'])))
+    stored_data.write("x{} Student \t${:.2f}\n".format(stdn_tickets, (stdn_tickets*costs['student'])))
+    stored_data.write("x{} Pensioner    ${:.2f}\n".format(psr_tickets, (psr_tickets*costs['pensioner'])))
+    stored_data.write("Total: ${:.2f}".format((adt_tickets*costs['adult'])+(chd_tickets*costs['child'])+(stdn_tickets*costs['student'])+(psr_tickets*costs['pensioner'])))
+    stored_data.close()
 
-    # a = open("seat_data.txt", "r")
-    # sum_text = a.readlines()
-    # a.close()
+    txt = open("seat_data.txt", "r")
+    sum_text = txt.readlines()
+    txt.close()
 
-    # b = sum_text[4]
-    # c = sum_text[5]
-    # d = sum_text[6]
-    # e = sum_text[7]
+    a = sum_text[4]
+    c = sum_text[5]
+    s = sum_text[6]
+    p = sum_text[7]
+    t = sum_text[8]
 
-    # q = f"{b}\n,{c}\n,{d}\n, {e}"
-    # ct.show_summary['text'] = q
+    display_sum= "\n"+ f"{a}{c}{s}{p}"
+    ct.show_summary['text'] = display_sum
+    ct.total['text'] = t
 
 # fix
 
@@ -96,6 +93,8 @@ class place:
         self.x = x
         self.y = y
         self.widget.place(relx=self.x, rely=self.y, anchor="center")
+
+
 
 class create_button:
     # Makes buttons
@@ -113,7 +112,6 @@ class create_button:
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
-
 
 
 
@@ -169,14 +167,15 @@ tickets = tk.Frame(window, bg=bg_col, cursor="heart")
 
 # Specified movie and session time
 movie_title = tk.Label(tickets, text=None, font=(font_name, 20), fg=btn_col, bg=bg_col,
-                       wraplength=200, justify="center")
+                       wraplength=180, justify="center")
+place(movie_title, 0.15, 0.5)
 
-time_label = tk.Label(tickets, text=None, justify="center", font=(font_name, 15),
+time_label = tk.Label(tickets, text=None, justify="center", font=(font_name, 20),
                       fg=btn_col, bg=bg_col)
-place(time_label, 0.1, 0.675)
+place(time_label, 0.15, 0.6)
 
 image = tk.Label(tickets, image=None, bg=bg_col)
-place(image, 0.1, 0.3)
+place(image, 0.15, 0.3)
 
 
 # Page widgets
