@@ -38,6 +38,7 @@ def screen_back():
     import seats as se
     se.seats.pack(expand=True, fill="both")
 
+
 def screen_forward():
     tickets.pack_forget()
     import contact as ct
@@ -45,7 +46,8 @@ def screen_forward():
 
     # Displays selected movie title on next page
     if "Spider" in movie_title.cget("text"):
-        ct.movie_title.config(text="Spider-Man: Across the Spider-Verse")
+        ct.movie_title.config(text="Spider-Man: Across the Spider-Verse", wraplength= 200,
+        font=(font_name, 14))
         ct.image.config(image=spider)
 
     elif "Barbie" in movie_title.cget("text"):

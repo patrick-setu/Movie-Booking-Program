@@ -43,8 +43,8 @@ class create_button:
 text = tk.Label(end, text="Booking has been confirmed!\n\n"
                 "Thank you for your purchase.\n\n"
                 "Check your email at example@email.com to view your tickets",
-                fg=fg_col, bg=btn_col, font=(font_name, 35), wraplength=400,
-                width=30, height=13)
+                fg=fg_col, bg=btn_col, font=(font_name, 25), wraplength=400,
+                width=30, height=12)
 place(text, 0.5, 0.45)
 
 close = create_button(end, "Close page", fg_col, btn_col, 0.5, 0.9,

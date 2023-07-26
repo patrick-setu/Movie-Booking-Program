@@ -62,9 +62,11 @@ place(display_bg, 0.5, 0.25)
 # Specified movie and session time
 image = tk.Label(display_bg)
 place(image, 0.15, 0.3)
+
 movie_title = tk.Label(display_bg, font=(font_name, 16), fg=btn_col, bg=img_bg,
                        wraplength=150, justify="center")
 place(movie_title, 0.15, 0.7)
+
 time_label = tk.Label(display_bg, justify="center", font=(font_name, 16),
                       fg=btn_col, bg=img_bg)
 place(time_label, 0.15, 0.9)
@@ -74,11 +76,11 @@ place(title_label, 0.6, 0.1)
 
 # Displays each ticket total and cost
 show_summary = tk.Label(display_bg, width=30, fg=fg_col, bg=btn_col,
-                        font=(font_name, 20))
+                        font=(font_name, 18))
 show_summary.place(relx=0.6, rely=0.5, anchor="center")
 
 # Displays final total
-total = tk.Label(display_bg, fg=btn_col, bg=img_bg, font=(font_name, 25, "bold"))
+total = tk.Label(display_bg, fg=btn_col, bg=img_bg, font=(font_name, 20, "bold"))
 place(total, 0.6, 0.9)
 
 # Contact labels and entryboxes
@@ -101,14 +103,14 @@ place(email_entry, 0.5, 0.66)
 card_label = tk.Label(contact, text="Card number", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(card_label, 0.275, 0.695, "nw")
-card_entry = tk.Entry(contact, fg="black", font=(font_name, 16), width=45,
-                     state= "disabled")
+card_entry = tk.Entry(contact, fg="black", font=(font_name, 16), width=45, textvariable="ajayisdumb",
+                     state= "readonly")
 place(card_entry, 0.5, 0.77)
 
 cvc_label = tk.Label(contact, text="CVC", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(cvc_label, 0.275, 0.805, "nw")
-cvc_entry = tk.Entry(contact, fg="black", font=(font_name, 16), width=45,
+cvc_entry = tk.Entry(contact, fg="yellow", font=(font_name, 16), width=45,
                      state= "disabled")
 place(cvc_entry, 0.5, 0.88)
 

@@ -100,14 +100,14 @@ def pop_up():
     help_bg.place(relx=0.5, rely=0.5, anchor="center")
 
     title = tk.Label(help_bg, text = "Seat selection help", fg=btn_col, background=img_bg,
-                     font=(font_name, 20))
+                     font=(font_name, 25))
     title.place(relx=0.5, rely=0.2, anchor="center")
 
     body_text = tk.Label(help_bg, text="Click to select seats\n"
                          "(Maximum of 60 unless reserved)\n\n"
                          "Please check availability keys\n"
                          "then press confirm when done or press the back button", wraplength=300,
-                         fg=btn_col, bg=img_bg, font=(font_name, 10), justify="center")
+                         fg=btn_col, bg=img_bg, font=(font_name, 15), justify="center")
     body_text.place(relx=0.5, rely=0.5, anchor="center")
 
     help.grab_set()
