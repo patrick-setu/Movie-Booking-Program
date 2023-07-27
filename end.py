@@ -10,7 +10,7 @@ font_name = "Yu Gothic Ui Semilight"
 
 # Creating and configuring root window settings
 window = None
-end = tk.Frame(window, bg=bg_col, cursor="heart")
+end = tk.Frame(window, bg=bg_col)
 
 class place:
     # Widget placing class shorthand
@@ -40,11 +40,8 @@ class create_button:
 
 # Page widgets
 
-text = tk.Label(end, text="Booking has been confirmed!\n\n"
-                "Thank you for your purchase.\n\n"
-                "Check your email at example@email.com to view your tickets",
-                fg=fg_col, bg=btn_col, font=(font_name, 25), wraplength=400,
-                width=30, height=12)
+text = tk.Label(end, fg=fg_col, bg=btn_col, font=(font_name, 25),
+                wraplength=400,width=30, height=12)
 place(text, 0.5, 0.45)
 
 close = create_button(end, "Close page", fg_col, btn_col, 0.5, 0.9,

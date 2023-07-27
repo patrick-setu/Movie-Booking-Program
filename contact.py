@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 # Constant colour shorthands
 bg_col = "#134074"
@@ -15,17 +16,39 @@ costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
 # Creating and configuring root window settings
 window = None
-contact = tk.Frame(window, bg=bg_col, cursor="heart")
+contact = tk.Frame(window, bg=bg_col)
+
+
+def check_num(string):
+    # Checks if there is a number in string
+    return any(char.isdigit() for char in string)
+
 
 def screen_back():
     contact.pack_forget()
     import tickets as ts
     ts.tickets.pack(expand=True, fill="both")
 
+
 def screen_forward():
-    contact.pack_forget()
-    import end as e
-    e.end.pack(expand=True, fill="both")
+    if check_num(name_entry.get()) == False and len(name_entry.get()) > 0 and "E.g." not in name_entry.get():
+        if "@" in email_entry.get() and ".com" in email_entry.get() and len(email_entry.get()) > 0 and len(email_entry.get()) <= 320 and "E.g." not in email_entry.get():
+
+            
+            contact.pack_forget()
+            import end as e
+            e.end.pack(expand=True, fill="both")
+            e.text.config(text = "Booking has been confirmed!\n\n" 
+            "Thank you for your purchase.\n\n"
+            f"Check your email at {email_entry.get()} to view your tickets")
+        else:
+            email_entry.delete(0, tk.END)
+            messagebox.showerror("Error", "Email not valid")
+    else:
+        name_entry.delete(0, tk.END)
+        messagebox.showerror("Error",
+                             "Name section must not contain numbers or be left blank")
+
 
 class place:
     # Widget placing class shorthand
@@ -35,6 +58,7 @@ class place:
         self.y = y
         self.anchor = anchor
         self.widget.place(relx=self.x, rely=self.y, anchor=self.anchor)
+
 
 class create_button:
     # Makes buttons
@@ -52,6 +76,33 @@ class create_button:
                              highlightbackground=bg_col,
                              font=(font_name, 16))
         self.but.place(relx = self.x, rely = self.y, anchor = "center")
+
+
+def clear_name(e):
+    sentence_length = len("E.g. Patrick Setu")
+
+    if name_entry.get() == "E.g. Patrick Setu":
+        for letters in range(sentence_length):
+            name_entry.delete(first = 0, last = None)
+    else:
+        pass
+    
+    name_entry.unbind("<Button-1")
+    name_entry.config(fg = "black")
+
+
+def clear_email(e):
+    sentence_length = len("E.g. patricksetu@email.com")
+
+    if email_entry.get() == "E.g. patricksetu@email.com":
+        for letters in range(sentence_length):
+            email_entry.delete(first = 0, last = None)
+    else:
+        pass
+    
+    email_entry.unbind("<Button-1")
+    email_entry.config(fg = "black")
+
 
 # Page widgets
 
@@ -87,15 +138,19 @@ place(total, 0.6, 0.9)
 name_label = tk.Label(contact, text="Full name", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(name_label, 0.275, 0.475, "nw")
-name_entry = tk.Entry(contact, textvariable="hello", fg="grey", font=(font_name, 16),
+name_entry = tk.Entry(contact, fg="grey", font=(font_name, 16),
                       width=45)
 place(name_entry, 0.5, 0.55)
+name_entry.insert(0, "E.g. Patrick Setu")
+name_entry.bind("<Button-1>", clear_name)
 
 email_label = tk.Label(contact, text="Email address", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(email_label, 0.275, 0.585, "nw")
 email_entry = tk.Entry(contact, fg="grey", font=(font_name, 16), width=45)
 place(email_entry, 0.5, 0.66)
+email_entry.insert(0, "E.g. patricksetu@email.com")
+email_entry.bind("<Button-1>", clear_email)
 
 # Card information entryboxes disabled
 # so no input required
@@ -103,16 +158,19 @@ place(email_entry, 0.5, 0.66)
 card_label = tk.Label(contact, text="Card number", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(card_label, 0.275, 0.695, "nw")
-card_entry = tk.Entry(contact, fg="black", font=(font_name, 16), width=45, textvariable="ajayisdumb",
-                     state= "readonly")
+card_num = tk.StringVar(value="XXXX-XXXX-XXXX-XXXX")
+card_entry = tk.Entry(contact, disabledforeground="black", font=(font_name, 16), width=45,
+                     state= "disabled", textvariable=card_num)
 place(card_entry, 0.5, 0.77)
 
 cvc_label = tk.Label(contact, text="CVC", fg=btn_col, bg=bg_col,
                       font=(font_name, 16))
 place(cvc_label, 0.275, 0.805, "nw")
-cvc_entry = tk.Entry(contact, fg="yellow", font=(font_name, 16), width=45,
-                     state= "disabled")
+cvc_num = tk.StringVar(value="XXX")
+cvc_entry = tk.Entry(contact, disabledforeground="black", font=(font_name, 16), width=45,
+                     state= "disabled", textvariable=cvc_num)
 place(cvc_entry, 0.5, 0.88)
 
 back = create_button(contact, "Back", fg_col, btn_col, 0.4, 0.96, comm=screen_back)
 forward = create_button(contact, "Confirm", fg_col, btn_col, 0.6, 0.96, comm=screen_forward)
+

@@ -1,7 +1,7 @@
 Amount of selected seats:
-2
+1
 Selected seats:
-['E7', 'E7']
+['D6']
 x1 Adult    	$10.00
 x1 Child    	$7.50
 x1 Student 	$9.00

@@ -166,7 +166,7 @@ class seat_type():
 
 # Creating and configuring root window settings
 window = None
-tickets = tk.Frame(window, bg=bg_col, cursor="heart")
+tickets = tk.Frame(window, bg=bg_col)
 
 
 # Specified movie and session time
