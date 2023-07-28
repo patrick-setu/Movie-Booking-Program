@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
+from email.message import EmailMessage
+import ssl
+import smtplib
 
 # Constant colour shorthands
 bg_col = "#134074"
@@ -13,6 +16,7 @@ type_bg = tk.PhotoImage(file="type_rect.png")
 ticket_bg = tk.PhotoImage(file="ticket_contact.png")
 
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
+
 
 # Creating and configuring root window settings
 window = None
@@ -31,9 +35,41 @@ def screen_back():
 
 
 def screen_forward():
+    # Continue if valid data is inputted
     if check_num(name_entry.get()) == False and len(name_entry.get()) > 0 and "E.g." not in name_entry.get():
-        if "@" in email_entry.get() and ".com" in email_entry.get() and len(email_entry.get()) > 0 and len(email_entry.get()) <= 320 and "E.g." not in email_entry.get():
+        if "@" in email_entry.get() and len(email_entry.get()) > 0 and len(email_entry.get()) <= 320 and "E.g." not in email_entry.get():
+            
+            txt = open("seat_data.txt", "r")
+            all_data = txt.readlines()
+            email_body = ""
+            for each_data in all_data:
+                email_body += each_data
+            txt.close()
+            
+            # Sends an email to the user inputted email address
+            email_sender = "patrickpython644@gmail.com"
+            email_password = "zngjckgvhsmewdwp"
+            email_receiver = email_entry.get()
 
+            # Email structure
+            subject = f"{movie_title['text']} Receipt"
+            body = f"{email_body}"
+
+            # Creates setup of email
+            em = EmailMessage()
+            em['From'] = email_sender
+            em['To'] = email_receiver
+            em['Subject'] = subject
+            em.set_content(body)
+
+            # Provides secure connection using ssl
+            context = ssl.create_default_context()
+
+            # Uses gmail as local host to send the email 
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                smtp.login(email_sender, email_password)
+
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
             
             contact.pack_forget()
             import end as e
