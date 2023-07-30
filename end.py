@@ -1,3 +1,4 @@
+"""Import tkinter for GUI."""
 import tkinter as tk
 import sys
 
@@ -12,18 +13,24 @@ font_name = "Yu Gothic Ui Semilight"
 window = None
 end = tk.Frame(window, bg=bg_col)
 
-class place:
-    # Widget placing class shorthand
-    def __init__(self, widget, x, y, anchor = "center"):
+
+class Place:
+    """Widget placing class shorthand."""
+
+    def __init__(self, widget, x, y, anchor="center"):
+        """Place widget based on x, y."""
         self.widget = widget
         self.x = x
         self.y = y
         self.anchor = anchor
         self.widget.place(relx=self.x, rely=self.y, anchor=self.anchor)
 
-class create_button:
-    # Makes buttons
-    def __init__(self, location, text, fg, bg, x, y, comm = None):
+
+class CreateButton:
+    """Create instance of a button."""
+
+    def __init__(self, location, text, fg, bg, x, y, comm=None):
+        """Stylise the button."""
         self.location = location
         self.text = text
         self.fg = fg
@@ -31,18 +38,32 @@ class create_button:
         self.x = x
         self.y = y
         self.comm = comm
-        self.but = tk.Button(self.location, bg = self.bg, text = self.text,
-                             fg=self.fg, command= self.comm, height = 1,
-                             width=15, borderwidth=0,
-                             highlightbackground=bg_col,
-                             font=(font_name, 16))
-        self.but.place(relx = self.x, rely = self.y, anchor = "center")
+        self.but = tk.Button(
+            self.location,
+            bg=self.bg,
+            text=self.text,
+            fg=self.fg,
+            command=self.comm,
+            height=1,
+            width=15,
+            borderwidth=0,
+            highlightbackground=bg_col,
+            font=(font_name, 16),
+        )
+        self.but.place(relx=self.x, rely=self.y, anchor="center")
+
 
 # Page widgets
 
-text = tk.Label(end, fg=fg_col, bg=btn_col, font=(font_name, 25),
-                wraplength=400,width=30, height=12)
-place(text, 0.5, 0.45)
+text = tk.Label(
+    end,
+    fg=fg_col,
+    bg=btn_col,
+    font=(font_name, 25),
+    wraplength=400,
+    width=30,
+    height=12,
+)
+Place(text, 0.5, 0.45)
 
-close = create_button(end, "Close page", fg_col, btn_col, 0.5, 0.9,
-                      lambda: sys.exit())
+CreateButton(end, "Close page", fg_col, btn_col, 0.5, 0.9, lambda: sys.exit())
