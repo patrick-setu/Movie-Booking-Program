@@ -68,7 +68,7 @@ def screen_forward():
     stored_data.write("x{} Child    \t${:.2f}\n".format(chd_tickets, (chd_tickets*costs['child'])))
     stored_data.write("x{} Student \t${:.2f}\n".format(stdn_tickets, (stdn_tickets*costs['student'])))
     stored_data.write("x{} Pensioner \t${:.2f}\n".format(psr_tickets, (psr_tickets*costs['pensioner'])))
-    stored_data.write("Total: ${:.2f}".format((adt_tickets*costs['adult'])+(chd_tickets*costs['child'])+(stdn_tickets*costs['student'])+(psr_tickets*costs['pensioner'])))
+    stored_data.write("Total: ${:.2f}\n\n".format((adt_tickets*costs['adult'])+(chd_tickets*costs['child'])+(stdn_tickets*costs['student'])+(psr_tickets*costs['pensioner'])))
     stored_data.close()
 
     txt = open("seat_data.txt", "r")

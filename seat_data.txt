@@ -1,9 +1,10 @@
 Amount of selected seats:
-1
+4
 Selected seats:
-['E7']
+['A1', 'A2', 'A3', 'A4']
 x1 Adult    	$10.00
 x1 Child    	$7.50
 x1 Student 	$9.00
 x1 Pensioner 	$7.00
 Total: $33.50
+

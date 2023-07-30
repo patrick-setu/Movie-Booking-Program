@@ -44,6 +44,7 @@ def screen_forward():
             email_body = ""
             for each_data in all_data:
                 email_body += each_data
+            email_body += f"Thank you for booking, {name_entry.get()}"
             txt.close()
             
             # Sends an email to the user inputted email address
