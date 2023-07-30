@@ -4,8 +4,6 @@ from tkinter import messagebox
 import random as r
 import datetime
 
-# editing this one to pep8
-
 # Constant colour shorthands
 bg_col = "#134074"
 fg_col = "#0b2545"
