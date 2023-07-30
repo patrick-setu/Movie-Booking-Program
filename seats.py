@@ -390,22 +390,51 @@ column_ten_seats = SeatMaker(seat_container, 9)
 column_eleven_seats = SeatMaker(seat_container, 10)
 column_twelve_seats = SeatMaker(seat_container, 11)
 
-column_eleven_seats.seat_button_5["bg"] = "yellow"
 
 # Setting disability chairs
 # by getting column number and seat(row 1-5)
-# column_one_seats.seat_5_state.set(2)
-# column_one_seats.seat_button_5['bg'] = "yellow"
-# column_two_seats.seat_5_state.set(2)
-# column_two_seats.seat_button_5['bg'] = "yellow"
-# column_three_seats.seat_5_state.set(2)
-# column_three_seats.seat_button_5['bg'] = "yellow"
-# column_ten_seats.seat_5_state.set(2)
-# column_ten_seats.seat_button_5['bg'] = "yellow"
-# column_eleven_seats.seat_5_state.set(2)
-# column_eleven_seats.seat_button_5['bg'] = "yellow"
-# column_twelve_seats.seat_5_state.set(2)
-# column_twelve_seats.seat_button_5['bg'] = "yellow"
+if column_one_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED1")
+    pass
+else:
+    column_one_seats.seat_5_state.set(2)
+    column_one_seats.seat_button_5['bg'] = "yellow"
+
+if column_two_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED2")
+    pass
+else:
+    column_two_seats.seat_5_state.set(2)
+    column_two_seats.seat_button_5['bg'] = "yellow"
+
+if column_three_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED3")
+    pass
+else:
+    column_three_seats.seat_5_state.set(2)
+    column_three_seats.seat_button_5['bg'] = "yellow"
+
+if column_ten_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED10")
+    pass
+else:
+    column_ten_seats.seat_5_state.set(2)
+    column_ten_seats.seat_button_5['bg'] = "yellow"
+
+if column_eleven_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED11")
+    pass
+else:
+    column_eleven_seats.seat_5_state.set(2)
+    column_eleven_seats.seat_button_5['bg'] = "yellow"
+
+if column_twelve_seats.seat_button_5.cget("bg") == "red":
+    print("THIS DISABLED SEAT IS BOOKED12")
+    pass
+else:
+    column_twelve_seats.seat_5_state.set(2)
+    column_twelve_seats.seat_button_5['bg'] = "yellow"
+
 
 # Creates labels for rows and seat number
 A_label = tk.Label(

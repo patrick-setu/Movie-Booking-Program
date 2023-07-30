@@ -26,10 +26,10 @@ third = f"{dt.strftime('%d')}/{dt.strftime('%m')}/{dt.strftime('%y')}\n3:00pm"
 costs = {"adult": 10, "child": 7.5, "student": 9, "pensioner": 7}
 
 tot = 5
-adt_tickets = 1
-chd_tickets = 1
-stdn_tickets = 1
-psr_tickets = 1
+adt_tickets = 0
+chd_tickets = 0
+stdn_tickets = 0
+psr_tickets = 0
 
 
 def screen_back():
@@ -100,8 +100,6 @@ def screen_forward():
     sum_text = txt.readlines()
     txt.close()
 
-    print(sum_text)
-
     a = sum_text[4]
     c = sum_text[5]
     s = sum_text[6]
@@ -165,7 +163,7 @@ class SeatType:
 
         self.lab.config(text=self.type_of_ticket)
 
-        # # return self.total_seats, self.type_of_ticket
+        return self.total_seats, self.type_of_ticket
 
     def decrease(self):
         """Decrease ticket type within boundary."""
@@ -178,7 +176,6 @@ class SeatType:
         self.lab.config(text=self.type_of_ticket)
 
         # return self.total_seats, self.type_of_ticket
-        pass
 
     def __init__(self, location, type_of_ticket, total_seats):
         """Create instances of ticket controlling buttons."""
@@ -303,10 +300,14 @@ psr_info = tk.Label(
 Place(psr_info, 0.3, 0.5)
 
 
-adt = SeatType(adult, adt_tickets, None)
-chd = SeatType(child, chd_tickets, None)
-stdn = SeatType(student, stdn_tickets, None)
-psr = SeatType(pensioner, psr_tickets, None)
+read = open("seat_data.txt", "r")
+read_all = read.readlines()
+read.close()
+
+adt = SeatType(adult, adt_tickets, int(read_all[1]))
+chd = SeatType(child, chd_tickets, int(read_all[1]))
+stdn = SeatType(student, stdn_tickets, int(read_all[1]))
+psr = SeatType(pensioner, psr_tickets, int(read_all[1]))
 
 
 # find way to save ticket amounts
