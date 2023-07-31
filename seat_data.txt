@@ -1,4 +1,10 @@
 Amount of selected seats:
 4
 Selected seats:
-['C1', 'D1', 'D2', 'E1']
+['B6', 'B7', 'B8', 'B9']
+x0 Adult    	$0.00
+x0 Child    	$0.00
+x0 Student 	$0.00
+x0 Pensioner 	$0.00
+Total: $0.00
+

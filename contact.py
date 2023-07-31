@@ -208,7 +208,7 @@ show_summary.place(relx=0.6, rely=0.5, anchor="center")
 
 # Displays final total
 total = tk.Label(display_bg, fg=btn_col, bg=img_bg, font=(font_name, 20, "bold"))
-Place(total, 0.6, 0.9)
+Place(total, 0.6, 0.95)
 
 # Contact labels and entryboxes
 name_label = tk.Label(
