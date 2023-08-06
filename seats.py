@@ -70,9 +70,34 @@ def screen_forward():
         stored_seats.write(f"{len(selected_seats)}\n")
         stored_seats.write(f"Selected seats:\n{selected_seats}\n")
         stored_seats.close()
+        # Copy of the file
+        stored_seats_copy = open("seat_data_copy.txt", "w")
+        stored_seats_copy.write("Amount of selected seats:\n")
+        stored_seats_copy.write(f"{len(selected_seats)}\n")
+        stored_seats_copy.write(f"Selected seats:\n{selected_seats}\n")
+        stored_seats_copy.close()
 
         seats.pack_forget()
         import tickets as ts
+        ts.tot = len(selected_seats)
+        ts.seats.type_of_ticket = 0
+        ts.seats.adults = 0
+        ts.seats.child = 0
+        ts.seats.student = 0
+        ts.seats.pensioner = 0
+        ts.seats.lab_1['text'] = ts.seats.adults
+        ts.seats.lab_2['text'] = ts.seats.child
+        ts.seats.lab_3['text'] = ts.seats.student
+        ts.seats.lab_4['text'] = ts.seats.pensioner
+        ts.seats.incr_1["state"] = 'normal'
+        ts.seats.incr_2["state"] = 'normal'
+        ts.seats.incr_3["state"] = 'normal'
+        ts.seats.incr_4["state"] = 'normal'
+        ts.seats.decr_1["state"] = 'disabled'
+        ts.seats.decr_2["state"] = 'disabled'
+        ts.seats.decr_3["state"] = 'disabled'
+        ts.seats.decr_4["state"] = 'disabled'
+        ts.forward.but['state'] = 'disabled'
 
         ts.tickets.pack(expand=True, fill="both")
 
@@ -99,10 +124,10 @@ def screen_forward():
         ts.time_label["text"] = time_label["text"]
 
         # Lets each ticket type know the max value/selected seat amount
-        ts.adt.total_seats = int(all_lines[1])
-        ts.chd.total_seats = int(all_lines[1])
-        ts.stdn.total_seats = int(all_lines[1])
-        ts.psr.total_seats = int(all_lines[1])
+        # ts.adt.total_seats = int(all_lines[1])
+        # ts.chd.total_seats = int(all_lines[1])
+        # ts.stdn.total_seats = int(all_lines[1])
+        # ts.psr.total_seats = int(all_lines[1])
 
 
 def pop_up():
@@ -271,7 +296,6 @@ class SeatMaker:
             seat["bg"] = "yellow"
             selected_seats.pop()
 
-        selected["text"] = seat["bg"]
 
     def __init__(self, location, column):
         """Column value inputted to class.

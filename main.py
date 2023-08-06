@@ -8,7 +8,7 @@ window = tk.Tk()
 window.title("Movie Booking Program")
 window.geometry("996x720")
 window.config(bg="#EEF4ED")
-# window.resizable(False, False) temporarily disabled
+window.resizable(False, False)
 
 
 # Creating short-hand for widget settings
