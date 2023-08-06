@@ -271,7 +271,6 @@ class SeatMaker:
             seat["bg"] = "yellow"
             selected_seats.pop()
 
-        selected["text"] = seat["bg"]
 
     def __init__(self, location, column):
         """Column value inputted to class.
