@@ -244,6 +244,7 @@ card_entry = tk.Entry(
     width=45,
     state="disabled",
     textvariable=card_num,
+    cursor="arrow"
 )
 Place(card_entry, 0.5, 0.77)
 
@@ -257,6 +258,7 @@ cvc_entry = tk.Entry(
     width=45,
     state="disabled",
     textvariable=cvc_num,
+    cursor="arrow"
 )
 Place(cvc_entry, 0.5, 0.88)
 
